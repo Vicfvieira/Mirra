@@ -1,0 +1,81 @@
+{%- liquid
+  assign bottom_scheme = section.settings.color_scheme_bottom
+-%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .mirra-wave-divider {
+    height: {{ section.settings.height | times: 0.6 | round }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .mirra-wave-divider {
+      height: {{ section.settings.height }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div
+  class="mirra-wave-divider color-{{ section.settings.color_scheme_top }}"
+  style="background-color: rgb(var(--color-background)); color: {{ bottom_scheme.settings.background }}; line-height: 0;"
+  aria-hidden="true"
+>
+  {%- render 'mirra-wave', shape: section.settings.shape, flip: section.settings.flip -%}
+</div>
+
+{% schema %}
+{
+  "name": "MIRRA — Divisor ondulado",
+  "tag": "div",
+  "class": "mirra-wave-divider-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Coloque entre duas seções. Escolha o esquema de cores da seção de cima e o da seção de baixo para a onda fazer a transição."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_top",
+      "label": "Esquema da seção de cima",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_bottom",
+      "label": "Esquema da seção de baixo",
+      "default": "scheme-2"
+    },
+    {
+      "type": "select",
+      "id": "shape",
+      "label": "Formato",
+      "options": [
+        { "value": "suave", "label": "Onda suave" },
+        { "value": "ondas", "label": "Ondas curtas" },
+        { "value": "assimetrica", "label": "Assimétrica" }
+      ],
+      "default": "suave"
+    },
+    {
+      "type": "checkbox",
+      "id": "flip",
+      "label": "Espelhar",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 24,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Altura",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "MIRRA — Divisor ondulado"
+    }
+  ]
+}
+{% endschema %}

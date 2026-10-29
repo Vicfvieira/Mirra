@@ -1,0 +1,142 @@
+{{ 'mirra-pages.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="mirra-section mirra-404 color-{{ section.settings.color_scheme }} gradient"
+  style="--mirra-pt: {{ section.settings.padding_top }}px; --mirra-pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width mirra-404__inner">
+    <p class="mirra-404__code" aria-hidden="true">
+      <span>4</span>
+      <span class="mirra-404__drop">{% render 'mirra-icon', icon: section.settings.icon, size: 96 %}</span>
+      <span>4</span>
+    </p>
+    <h1 class="mirra-title mirra-title--lg">{{ section.settings.heading }}</h1>
+    {%- if section.settings.text != blank -%}
+      <div class="mirra-lead mirra-richtext">{{ section.settings.text }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.show_search -%}
+      <form action="{{ routes.search_url }}" method="get" role="search" class="mirra-404__search">
+        <label class="mirra-visually-hidden" for="Mirra404Search">{{ 'mirra.general.search' | t }}</label>
+        <input
+          id="Mirra404Search"
+          type="search"
+          name="q"
+          class="mirra-input"
+          placeholder="{{ section.settings.search_placeholder | escape }}"
+        >
+        <input type="hidden" name="options[prefix]" value="last">
+        <button type="submit" class="button button--primary">{{ 'general.search.search' | t }}</button>
+      </form>
+    {%- endif -%}
+
+    <div class="mirra-buttons mirra-404__buttons">
+      {%- if section.settings.button_label_1 != blank -%}
+        <a href="{{ section.settings.button_link_1 | default: routes.all_products_collection_url }}" class="button mirra-button--accent">
+          {{- section.settings.button_label_1 | escape -}}
+        </a>
+      {%- endif -%}
+      {%- if section.settings.button_label_2 != blank -%}
+        <a href="{{ section.settings.button_link_2 | default: routes.root_url }}" class="button button--secondary">
+          {{- section.settings.button_label_2 | escape -}}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MIRRA — Página 404",
+  "tag": "div",
+  "class": "mirra-404-section",
+  "enabled_on": {
+    "templates": ["404"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Ícone no lugar do zero",
+      "options": [
+        { "value": "gota", "label": "Gota" },
+        { "value": "chama", "label": "Chama" },
+        { "value": "folha", "label": "Folha" }
+      ],
+      "default": "gota"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "default": "Essa página <em>evaporou</em>."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Como um óleo essencial esquecido sem tampa. Tente buscar o que procura ou volte para um lugar conhecido.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Mostrar busca",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Texto do campo de busca",
+      "default": "Busque por vela, óleo, kit…"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "Botão 1 — texto",
+      "default": "Ver todos os produtos"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Botão 1 — link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Botão 2 — texto",
+      "default": "Voltar para o início"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Botão 2 — link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cores",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço superior",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço inferior",
+      "default": 120
+    }
+  ]
+}
+{% endschema %}

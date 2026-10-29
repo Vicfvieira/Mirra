@@ -1,0 +1,171 @@
+{
+  "sections": {
+    "hero": {
+      "type": "mirra-page-hero",
+      "settings": {
+        "eyebrow": "Central de ajuda",
+        "icon": "gota",
+        "heading": "Tire suas <em>dúvidas</em>",
+        "heading_size": "xl",
+        "text": "<p>Respostas rápidas sobre pedidos, entregas, pagamentos e produtos.</p>",
+        "alignment": "center",
+        "color_scheme": "scheme-2",
+        "padding_top": 80,
+        "padding_bottom": 48
+      }
+    },
+    "wave": {
+      "type": "mirra-wave-divider",
+      "settings": {
+        "color_scheme_top": "scheme-2",
+        "color_scheme_bottom": "scheme-1",
+        "shape": "ondas",
+        "flip": false,
+        "height": 56
+      }
+    },
+    "faq": {
+      "type": "mirra-faq",
+      "blocks": {
+        "b0": {
+          "type": "group",
+          "settings": {
+            "title": "Pedidos e envio",
+            "icon": "caminhao"
+          }
+        },
+        "b1": {
+          "type": "question",
+          "settings": {
+            "question": "Qual o prazo de entrega?",
+            "answer": "<p>Despachamos em até 2 dias úteis após a confirmação do pagamento. O prazo final depende do seu CEP e aparece no checkout antes de finalizar a compra.</p>"
+          }
+        },
+        "b2": {
+          "type": "question",
+          "settings": {
+            "question": "Vocês entregam para todo o Brasil?",
+            "answer": "<p>Sim! Enviamos para todos os estados pelos Correios e transportadoras parceiras, sempre com código de rastreio.</p>"
+          }
+        },
+        "b3": {
+          "type": "question",
+          "settings": {
+            "question": "Como funciona o frete grátis?",
+            "answer": "<p>Compras acima de R$ 199 têm frete grátis para todo o Brasil. O carrinho mostra quanto falta para você chegar lá.</p>"
+          }
+        },
+        "b4": {
+          "type": "group",
+          "settings": {
+            "title": "Pagamento",
+            "icon": "cartao"
+          }
+        },
+        "b5": {
+          "type": "question",
+          "settings": {
+            "question": "Quais as formas de pagamento?",
+            "answer": "<p>Pix (com 5% de desconto), boleto e cartões de crédito em até 6x sem juros.</p>"
+          }
+        },
+        "b6": {
+          "type": "question",
+          "settings": {
+            "question": "Onde uso meu cupom de primeira compra?",
+            "answer": "<p>No checkout, no campo \"Código de desconto\". O cupom BEMVINDA10 é enviado depois do cadastro na newsletter.</p>"
+          }
+        },
+        "b7": {
+          "type": "group",
+          "settings": {
+            "title": "Trocas e devoluções",
+            "icon": "troca"
+          }
+        },
+        "b8": {
+          "type": "question",
+          "settings": {
+            "question": "Posso trocar ou devolver?",
+            "answer": "<p>Sim, em até 7 dias após o recebimento, com o produto lacrado. Fale com a gente pela página de contato.</p>"
+          }
+        },
+        "b9": {
+          "type": "question",
+          "settings": {
+            "question": "Meu produto chegou com problema. E agora?",
+            "answer": "<p>Mande uma foto pelo WhatsApp ou e-mail em até 7 dias. Enviamos outro sem custo.</p>"
+          }
+        },
+        "b10": {
+          "type": "group",
+          "settings": {
+            "title": "Produtos",
+            "icon": "folha"
+          }
+        },
+        "b11": {
+          "type": "question",
+          "settings": {
+            "question": "Os produtos são veganos?",
+            "answer": "<p>Sim. Nenhum ingrediente de origem animal e nenhum teste em animais.</p>"
+          }
+        },
+        "b12": {
+          "type": "question",
+          "settings": {
+            "question": "Quanto tempo dura uma vela de 200g?",
+            "answer": "<p>Cerca de 40 horas de queima. Na primeira vez, deixe a cera derreter até as bordas para evitar o \"túnel\".</p>"
+          }
+        },
+        "b13": {
+          "type": "question",
+          "settings": {
+            "question": "Os óleos podem ser usados no rosto?",
+            "answer": "<p>Nossos óleos corporais são formulados para o corpo. Para o rosto, faça um teste de sensibilidade antes e evite a área dos olhos.</p>"
+          }
+        },
+        "b14": {
+          "type": "question",
+          "settings": {
+            "question": "A MIRRA existe de verdade?",
+            "answer": "<p>Não — esta é uma loja demonstrativa de uma marca fictícia, criada para mostrar um tema Shopify personalizado. Nenhum pedido é processado de verdade.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "b11",
+        "b12",
+        "b13",
+        "b14"
+      ],
+      "settings": {
+        "heading": "Perguntas <em>frequentes</em>",
+        "text": "<p>Não achou sua resposta? Fale com a gente — respondemos em até 1 dia útil.</p>",
+        "button_label": "Falar com a MIRRA",
+        "button_link": "shopify://pages/contato",
+        "open_first": true,
+        "structured_data": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 48,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "wave",
+    "faq"
+  ]
+}

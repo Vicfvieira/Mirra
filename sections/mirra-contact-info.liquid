@@ -1,0 +1,128 @@
+{{ 'mirra-pages.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="mirra-section mirra-contact-info color-{{ section.settings.color_scheme }} gradient"
+  style="--mirra-pt: {{ section.settings.padding_top }}px; --mirra-pb: {{ section.settings.padding_bottom }}px;"
+  {% if section.settings.heading != blank %}
+    aria-labelledby="MirraContactTitle-{{ section.id }}"
+  {% endif %}
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <h2 id="MirraContactTitle-{{ section.id }}" class="mirra-title mirra-title--md mirra-contact-info__heading">
+        {{- section.settings.heading -}}
+      </h2>
+    {%- endif -%}
+    <ul class="mirra-contact-info__list" role="list">
+      {%- for block in section.blocks -%}
+        <li class="mirra-contact-card" {{ block.shopify_attributes }}>
+          <span class="mirra-contact-card__icon">{% render 'mirra-icon', icon: block.settings.icon, size: 28 %}</span>
+          <h3 class="mirra-contact-card__title">{{ block.settings.title }}</h3>
+          {%- if block.settings.text != blank -%}
+            <div class="mirra-contact-card__text mirra-richtext">{{ block.settings.text }}</div>
+          {%- endif -%}
+          {%- if block.settings.link_label != blank and block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}" class="mirra-link-arrow">
+              {{- block.settings.link_label | escape -}}
+              {%- render 'mirra-icon', icon: 'seta', size: 18 -%}
+            </a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MIRRA — Canais de contato",
+  "tag": "div",
+  "class": "mirra-contact-info-section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "default": "Outros <em>jeitos</em> de falar com a gente"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cores",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço superior",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço inferior",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "channel",
+      "name": "Canal",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Ícone",
+          "options": [
+            { "value": "coracao", "label": "Coração" },
+            { "value": "mapa", "label": "Mapa" },
+            { "value": "caminhao", "label": "Caminhão" },
+            { "value": "presente", "label": "Presente" },
+            { "value": "brilho", "label": "Brilho" },
+            { "value": "gota", "label": "Gota" }
+          ],
+          "default": "coracao"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "WhatsApp"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto",
+          "default": "<p>(11) 90000-0000<br>Seg. a sex., 9h às 18h</p>"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Texto do link",
+          "default": "Chamar no WhatsApp"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MIRRA — Canais de contato",
+      "blocks": [{ "type": "channel" }]
+    }
+  ]
+}
+{% endschema %}

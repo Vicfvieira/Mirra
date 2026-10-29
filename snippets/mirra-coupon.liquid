@@ -1,0 +1,23 @@
+{% comment %}
+  MIRRA — cupom em formato de tíquete com botão copiar.
+
+  Accepts:
+  - code: {String} código do cupom
+
+  Usage:
+  {% render 'mirra-coupon', code: 'BEMVINDA10' %}
+{% endcomment %}
+
+{%- if code != blank -%}
+  <mirra-copy class="mirra-coupon" data-copy="{{ code | escape }}">
+    <span class="mirra-coupon__code">{{ code | escape }}</span>
+    <button
+      type="button"
+      class="mirra-coupon__button mirra-focus"
+      data-label-copied="{{ 'mirra.newsletter.copied' | t }}"
+    >
+      {{- 'mirra.newsletter.copy' | t -}}
+    </button>
+    <span class="mirra-visually-hidden" role="status" aria-live="polite" data-copy-status></span>
+  </mirra-copy>
+{%- endif -%}

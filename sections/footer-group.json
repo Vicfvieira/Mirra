@@ -2,27 +2,47 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
-    "footer": {
-      "type": "footer",
-      "blocks": {},
-      "block_order": [],
+    "mirra-footer": {
+      "type": "mirra-footer",
+      "blocks": {
+        "brand": {
+          "type": "brand",
+          "settings": {
+            "logo_width": 160,
+            "text": "<p>Autocuidado & rituais naturais. Óleos, velas e cosméticos feitos à mão em pequenos lotes.</p>",
+            "show_social": true
+          }
+        },
+        "menu-loja": {
+          "type": "menu",
+          "settings": { "heading": "Loja", "menu": "main-menu" }
+        },
+        "menu-ajuda": {
+          "type": "menu",
+          "settings": { "heading": "Ajuda", "menu": "footer" }
+        },
+        "atendimento": {
+          "type": "text",
+          "settings": {
+            "heading": "Atendimento",
+            "text": "<p>Seg. a sex., 9h às 18h<br>contato@mirra.exemplo<br>WhatsApp (11) 90000-0000</p>"
+          }
+        }
+      },
+      "block_order": ["brand", "menu-loja", "menu-ajuda", "atendimento"],
       "settings": {
-        "color_scheme": "scheme-1",
-        "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
-        "enable_follow_on_shop": true,
-        "show_social": true,
-        "enable_country_selector": true,
-        "enable_language_selector": true,
+        "color_scheme": "scheme-5",
+        "show_wave": true,
+        "headline": "Rituais pequenos, <em>efeitos</em> grandes.",
         "payment_enable": true,
+        "payment_note": "Pix com 5% de desconto • Boleto • Cartão em até 6x sem juros",
         "show_policy": true,
-        "margin_top": 0,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "demo_text": "Loja demonstrativa — marca fictícia",
+        "credit_label": "Desenvolvido por",
+        "credit_name": "Victoria Fernandes",
+        "credit_url": "https://portifolio-vicszf.vercel.app"
       }
     }
   },
-  "order": [
-    "footer"
-  ]
+  "order": ["mirra-footer"]
 }

@@ -1,0 +1,124 @@
+/* ---------- Barra de compra fixa ---------- */
+.mirra-sticky-buy {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  border-top: 2px solid rgb(var(--color-foreground));
+  box-shadow: 0 -6px 0 rgba(var(--color-shadow), 0.15);
+  transform: translateY(110%);
+  transition: transform 0.3s ease;
+}
+
+.mirra-sticky-buy.is-visible {
+  transform: translateY(0);
+}
+
+.mirra-sticky-buy__inner {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding-top: 1rem;
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+}
+
+.mirra-sticky-buy__media img {
+  display: block;
+  width: 5.6rem;
+  height: 5.6rem;
+  object-fit: cover;
+  border: 1.5px solid rgb(var(--color-foreground));
+  border-radius: 0.8rem;
+}
+
+.mirra-sticky-buy__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.mirra-sticky-buy__title {
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: 1.6rem;
+  line-height: 1.2;
+  color: rgb(var(--color-foreground));
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mirra-sticky-buy__price {
+  font-size: 1.4rem;
+  font-weight: var(--font-body-weight-bold);
+  color: rgb(var(--color-foreground));
+}
+
+.mirra-sticky-buy__price .price {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.mirra-sticky-buy__price .price__badge-sale,
+.mirra-sticky-buy__price .price__badge-sold-out,
+.mirra-sticky-buy__price .unit-price {
+  display: none;
+}
+
+.mirra-sticky-buy__button {
+  flex-shrink: 0;
+  min-height: 4.8rem;
+  padding-inline: 2.4rem;
+}
+
+@media screen and (min-width: 750px) {
+  .mirra-sticky-buy:not(.mirra-sticky-buy--desktop) {
+    display: none;
+  }
+}
+
+/* ---------- Selos e parcelamento ---------- */
+.product__info-container > .mirra-product-pills,
+.product__info-container > .mirra-installments {
+  margin: 1.6rem 0;
+}
+
+.mirra-product-pills {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mirra-product-pills__status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.mirra-product-pills__status:empty {
+  display: none;
+}
+
+.mirra-installments {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.5rem;
+  color: rgba(var(--color-foreground), 0.9);
+}
+
+.mirra-installments strong {
+  color: rgb(var(--color-foreground));
+}
+
+.mirra-installments .mirra-icon {
+  flex-shrink: 0;
+  color: rgb(var(--mirra-accent));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mirra-sticky-buy {
+    transition: none;
+  }
+}

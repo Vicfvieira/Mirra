@@ -539,5 +539,53 @@
       "expanded": "Formulário de destinatário do cartão-presente expandido",
       "collapsed": "Formulário de destinatário do cartão-presente recolhido"
     }
+  },
+  "mirra": {
+    "marquee": {
+      "pause": "Pausar letreiro",
+      "play": "Retomar letreiro",
+      "label": "Avisos da loja"
+    },
+    "carousel": {
+      "previous": "Anterior",
+      "next": "Próximo",
+      "slide": "{{ index }} de {{ count }}",
+      "go_to": "Ir para o item {{ index }}"
+    },
+    "badges": {
+      "new": "Novo",
+      "bestseller": "Mais vendido",
+      "low_stock": "Últimas unidades"
+    },
+    "shipping": {
+      "remaining_html": "Faltam <strong>{{ amount }}</strong> para o frete grátis",
+      "unlocked": "Oba! Você ganhou frete grátis.",
+      "label": "Progresso até o frete grátis"
+    },
+    "product": {
+      "installments_html": "ou <strong>{{ parcelas }}x de {{ amount }}</strong> sem juros",
+      "sticky_add": "Adicionar",
+      "sticky_label": "Compra rápida"
+    },
+    "newsletter": {
+      "success": "Cadastro confirmado! Use seu cupom na primeira compra:",
+      "copy": "Copiar cupom",
+      "copied": "Cupom copiado!",
+      "email_label": "Seu melhor e-mail"
+    },
+    "footer": {
+      "demo": "Loja demonstrativa — marca fictícia",
+      "credit": "Desenvolvido por",
+      "payment": "Formas de pagamento",
+      "social": "Redes sociais",
+      "new_window": "abre em uma nova aba"
+    },
+    "testimonials": {
+      "rating": "Avaliação: {{ rating }} de 5 estrelas"
+    },
+    "general": {
+      "step": "Passo {{ number }}",
+      "search": "Buscar na loja"
+    }
   }
 }

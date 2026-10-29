@@ -1,0 +1,44 @@
+{% comment %}
+  MIRRA — selos de benefícios na página de produto (bloco "MIRRA — Selos").
+
+  Accepts:
+  - block: {Object} bloco mirra_badges do main-product
+  - product: {Object} produto
+
+  Usage:
+  {% render 'mirra-product-pills', block: block, product: product %}
+{% endcomment %}
+
+{%- liquid
+  assign show_block = true
+  if block.settings.only_tag != blank
+    assign wanted_tag = block.settings.only_tag | downcase | strip
+    assign product_tags = product.tags | join: '|' | downcase | split: '|'
+    unless product_tags contains wanted_tag
+      assign show_block = false
+    endunless
+  endif
+-%}
+
+{%- if show_block -%}
+  {{ 'mirra-product.css' | asset_url | stylesheet_tag }}
+  <div class="mirra-product-pills" {{ block.shopify_attributes }}>
+    {%- if block.settings.show_status_badges -%}
+      <div class="mirra-product-pills__status">
+        {%- render 'mirra-product-badges', product: product, max: 3 -%}
+      </div>
+    {%- endif -%}
+    <ul class="mirra-pill-list" role="list">
+      {%- for i in (1..4) -%}
+        {%- liquid
+          assign text_key = 'text_' | append: i
+          assign icon_key = 'icon_' | append: i
+          assign pill_text = block.settings[text_key]
+        -%}
+        {%- if pill_text != blank -%}
+          <li>{% render 'mirra-pill', text: pill_text, icon: block.settings[icon_key] %}</li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+{%- endif -%}

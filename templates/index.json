@@ -1,75 +1,383 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero": {
+      "type": "mirra-hero",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "pill-1": {
+          "type": "pill",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "text": "Feito à mão",
+            "icon": "coracao"
           }
         },
-        "button": {
-          "type": "buttons",
+        "pill-2": {
+          "type": "pill",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "text": "Cruelty free",
+            "icon": "folha"
+          }
+        },
+        "pill-3": {
+          "type": "pill",
+          "settings": {
+            "text": "Ingredientes naturais",
+            "icon": "gota"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "pill-1",
+        "pill-2",
+        "pill-3"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "eyebrow": "Autocuidado & rituais naturais",
+        "eyebrow_icon": "brilho",
+        "heading": "Rituais pequenos, <em>efeitos</em> grandes.",
+        "heading_size": "xl",
+        "text": "<p>Óleos, velas e cosméticos naturais feitos à mão em pequenos lotes — para transformar cinco minutos do seu dia em um ritual.</p>",
+        "button_label_1": "Comprar agora",
+        "button_link_1": "shopify://collections/all",
+        "button_label_2": "Monte seu ritual",
+        "button_link_2": "shopify://collections/presentes",
+        "image_ratio": "portrait",
+        "image_position": "right",
+        "tilt_image": false,
+        "badge_text": "100% vegano",
+        "badge_icon": "folha",
+        "badge_style": "accent",
+        "stamp_text": "feito à mão • pequenos lotes • ",
+        "stamp_icon": "gota",
+        "color_scheme": "scheme-1",
+        "padding_top": 56,
+        "padding_bottom": 96
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "benefits": {
+      "type": "mirra-benefits",
+      "blocks": {
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "caminhao",
+            "title": "Frete grátis acima de [frete]",
+            "text": "Calculado automaticamente no carrinho"
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "mapa",
+            "title": "Entrega para todo o Brasil",
+            "text": "Envio com rastreio em até 2 dias úteis"
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "cartao",
+            "title": "Até 6x sem juros",
+            "text": "No cartão — ou 5% off no Pix"
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "troca",
+            "title": "Troca fácil",
+            "text": "7 dias para trocar ou devolver"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
+        "heading": "",
+        "accessible_label": "Benefícios da loja",
+        "color_scheme": "scheme-2",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
+    "collections": {
+      "type": "mirra-collection-cards",
+      "blocks": {
+        "corpo": {
+          "type": "card",
+          "settings": {
+            "collection": "corpo",
+            "title": "Corpo",
+            "text": "Óleos, esfoliantes e manteigas para a pele.",
+            "icon": "gota",
+            "tag": "Pele macia",
+            "link": "shopify://collections/corpo",
+            "link_label": "Ver coleção",
+            "color_scheme": "scheme-2"
+          }
+        },
+        "casa": {
+          "type": "card",
+          "settings": {
+            "collection": "casa",
+            "title": "Casa",
+            "text": "Velas e brumas para perfumar o ambiente.",
+            "icon": "chama",
+            "tag": "",
+            "link": "shopify://collections/casa",
+            "link_label": "Ver coleção",
+            "color_scheme": "scheme-4"
+          }
+        },
+        "presentes": {
+          "type": "card",
+          "settings": {
+            "collection": "presentes",
+            "title": "Presentes",
+            "text": "Kits prontos, embalados à mão com carinho.",
+            "icon": "presente",
+            "tag": "Embalagem grátis",
+            "link": "shopify://collections/presentes",
+            "link_label": "Ver coleção",
+            "color_scheme": "scheme-3"
+          }
+        }
+      },
+      "block_order": [
+        "corpo",
+        "casa",
+        "presentes"
+      ],
+      "settings": {
+        "eyebrow": "Escolha seu ritual",
+        "heading": "Para o corpo, a casa e <em>quem</em> você ama.",
+        "text": "<p>Três coleções pensadas para desacelerar: cuide da pele, perfume o ambiente e presenteie com intenção.</p>",
         "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
+        "padding_top": 96,
+        "padding_bottom": 64
+      }
+    },
+    "bestsellers": {
+      "type": "mirra-featured-products",
+      "settings": {
+        "eyebrow": "Queridinhos da comunidade",
+        "heading": "Os <em>mais</em> amados",
+        "collection": "mais-vendidos",
+        "products_to_show": 4,
+        "columns_desktop": 4,
         "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "image_ratio": "portrait",
+        "show_secondary_image": true,
+        "show_rating": false,
+        "enable_quick_add": true,
+        "view_all_label": "Ver todos",
+        "view_all_link": "shopify://collections/all",
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 96
+      }
+    },
+    "wave-1": {
+      "type": "mirra-wave-divider",
+      "settings": {
+        "color_scheme_top": "scheme-1",
+        "color_scheme_bottom": "scheme-2",
+        "shape": "suave",
+        "flip": false,
+        "height": 72
+      }
+    },
+    "founder": {
+      "type": "mirra-founder",
+      "settings": {
+        "photo_caption": "Desde a primeira vela",
+        "image_position": "left",
+        "eyebrow": "Sobre a fundadora",
+        "heading": "Tudo começou numa <em>cozinha</em> com cheiro de alecrim.",
+        "quote": "Eu queria produtos que fizessem a gente parar. Nem que fosse por cinco minutos.",
+        "text": "<p>A MIRRA nasceu de um caderno de receitas e de muita tentativa e erro. Cada óleo e cada vela ainda é testado em pequenos lotes antes de chegar até você — com ingredientes de origem vegetal e embalagens recicláveis.</p><p><em>A MIRRA é uma marca fictícia criada para demonstração.</em></p>",
+        "name": "Marina Rocha",
+        "role": "Fundadora & perfumista (personagem fictícia)",
+        "button_label": "Conheça nossa história",
+        "button_link": "shopify://pages/sobre",
+        "color_scheme": "scheme-2",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "wave-2": {
+      "type": "mirra-wave-divider",
+      "settings": {
+        "color_scheme_top": "scheme-2",
+        "color_scheme_bottom": "scheme-3",
+        "shape": "ondas",
+        "flip": false,
+        "height": 56
+      }
+    },
+    "ritual": {
+      "type": "mirra-ritual-steps",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "icon": "chama",
+            "title": "Acenda",
+            "text": "<p>Escolha uma vela e deixe o aroma preparar o ambiente.</p>",
+            "link_label": "Ver velas",
+            "link": "shopify://collections/casa"
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "icon": "gota",
+            "title": "Massageie",
+            "text": "<p>Aqueça algumas gotas de óleo nas mãos e espalhe sem pressa.</p>",
+            "link_label": "Ver óleos",
+            "link": "shopify://collections/corpo"
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "icon": "folha",
+            "title": "Respire",
+            "text": "<p>Finalize com a bruma de travesseiro e três respirações profundas.</p>",
+            "link_label": "Ver brumas",
+            "link": "shopify://collections/casa"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "eyebrow": "Em 3 passos",
+        "heading": "Monte seu <em>ritual</em>",
+        "text": "<p>Não precisa de banheira nem de uma hora livre. Só de intenção.</p>",
+        "button_label": "Quero meu kit",
+        "button_link": "shopify://collections/presentes",
+        "color_scheme": "scheme-3",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "wave-3": {
+      "type": "mirra-wave-divider",
+      "settings": {
+        "color_scheme_top": "scheme-3",
+        "color_scheme_bottom": "scheme-1",
+        "shape": "assimetrica",
+        "flip": true,
+        "height": 72
+      }
+    },
+    "testimonials": {
+      "type": "mirra-testimonials",
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "O óleo de lavanda virou meu momento favorito do dia. Durmo melhor desde que comecei.",
+            "name": "Ana Beatriz",
+            "detail": "Cliente fictícia • São Paulo, SP",
+            "rating": 5,
+            "color_scheme": "scheme-2"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "A vela Figo & Cedro perfuma a sala inteira e queima por horas. Já estou no terceiro pote.",
+            "name": "Juliana M.",
+            "detail": "Cliente fictícia • Recife, PE",
+            "rating": 5,
+            "color_scheme": "scheme-4"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Dei o Kit Ritual de presente e minha mãe amou até a embalagem. Chegou super rápido.",
+            "name": "Camila R.",
+            "detail": "Cliente fictícia • Curitiba, PR",
+            "rating": 5,
+            "color_scheme": "scheme-2"
+          }
+        },
+        "t4": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Esfoliante com cheiro de café de verdade. Pele macia por dias, sem ressecar.",
+            "name": "Larissa P.",
+            "detail": "Cliente fictícia • Belo Horizonte, MG",
+            "rating": 4,
+            "color_scheme": "scheme-1"
+          }
+        },
+        "t5": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Atendimento carinhoso e um bilhete escrito à mão no pacote. Detalhes que fazem diferença.",
+            "name": "Renata S.",
+            "detail": "Cliente fictícia • Porto Alegre, RS",
+            "rating": 5,
+            "color_scheme": "scheme-2"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "settings": {
+        "eyebrow": "Quem usa, conta",
+        "heading": "Pequenos rituais, <em>grandes</em> histórias",
+        "disclaimer": "Depoimentos fictícios — conteúdo de exemplo",
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 48
+      }
+    },
+    "newsletter": {
+      "type": "mirra-newsletter",
+      "settings": {
+        "eyebrow": "Clube MIRRA",
+        "heading": "Ganhe <em>10% off</em> no primeiro ritual",
+        "text": "<p>Receba lançamentos, receitas de autocuidado e ofertas antes de todo mundo. Prometemos poucos e-mails — e bons.</p>",
+        "placeholder": "seu@email.com",
+        "button_label": "Quero meu cupom",
+        "coupon_code": "BEMVINDA10",
+        "show_coupon_upfront": false,
+        "coupon_label": "Use na primeira compra:",
+        "fineprint": "<p>Válido para a primeira compra. Você pode cancelar a inscrição quando quiser.</p>",
+        "color_scheme": "scheme-1",
+        "box_color_scheme": "scheme-3",
+        "padding_top": 48,
+        "padding_bottom": 120
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "hero",
+    "benefits",
+    "collections",
+    "bestsellers",
+    "wave-1",
+    "founder",
+    "wave-2",
+    "ritual",
+    "wave-3",
+    "testimonials",
+    "newsletter"
   ]
 }

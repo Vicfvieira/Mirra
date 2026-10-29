@@ -1,0 +1,83 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign media = current_variant.featured_media | default: product.featured_media
+-%}
+
+{%- if product != blank -%}
+  {{ 'mirra-product.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'mirra-product.js' | asset_url }}" defer="defer"></script>
+
+  <mirra-sticky-buy
+    class="mirra-sticky-buy color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_on_desktop %} mirra-sticky-buy--desktop{% endif %}"
+    aria-label="{{ 'mirra.product.sticky_label' | t }}"
+    role="region"
+    data-sold-out="{{ 'products.product.sold_out' | t }}"
+    data-add-label="{{ 'mirra.product.sticky_add' | t }}"
+    hidden
+  >
+    <div class="mirra-sticky-buy__inner page-width">
+      {%- if media != blank -%}
+        <div class="mirra-sticky-buy__media">
+          {{
+            media
+            | image_url: width: 144
+            | image_tag: widths: '72, 144', sizes: '56px', loading: 'lazy', alt: '', data-sticky-image: ''
+          }}
+        </div>
+      {%- endif -%}
+      <div class="mirra-sticky-buy__info">
+        <p class="mirra-sticky-buy__title">{{ product.title | escape }}</p>
+        <div class="mirra-sticky-buy__price" data-sticky-price>
+          {{ current_variant.price | money }}
+        </div>
+      </div>
+      <button
+        type="button"
+        class="button button--primary mirra-sticky-buy__button"
+        data-sticky-button
+        {% unless current_variant.available %}
+          disabled
+        {% endunless %}
+      >
+        {%- if current_variant.available -%}
+          {{ 'mirra.product.sticky_add' | t }}
+        {%- else -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- endif -%}
+      </button>
+    </div>
+  </mirra-sticky-buy>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "MIRRA — Compra fixa",
+  "class": "mirra-sticky-buy-section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Aparece quando o botão \"Adicionar ao carrinho\" sai da tela. Usa o mesmo formulário do produto (variante e quantidade escolhidas)."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_desktop",
+      "label": "Mostrar também no desktop",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cores",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "MIRRA — Compra fixa"
+    }
+  ]
+}
+{% endschema %}

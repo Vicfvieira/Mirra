@@ -81,6 +81,25 @@
             "id": "shadow",
             "label": "t:settings_schema.colors.settings.shadow.label",
             "default": "#121212"
+          },
+          {
+            "type": "color",
+            "id": "mirra_accent",
+            "label": "MIRRA — destaque (palavra em itálico)",
+            "info": "Cor da palavra em itálico dos títulos. Garanta contraste com o fundo.",
+            "default": "#9A4E0C"
+          },
+          {
+            "type": "color",
+            "id": "mirra_highlight",
+            "label": "MIRRA — mel (botão secundário e selos)",
+            "default": "#E8913A"
+          },
+          {
+            "type": "color",
+            "id": "mirra_highlight_label",
+            "label": "MIRRA — texto sobre o mel",
+            "default": "#2A2226"
           }
         ],
         "role": {
@@ -1449,6 +1468,84 @@
         "id": "cart_color_scheme",
         "label": "t:sections.all.colors.label",
         "default": "scheme-1"
+      }
+    ]
+  },
+  {
+    "name": "MIRRA — Loja",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Frete grátis"
+      },
+      {
+        "type": "checkbox",
+        "id": "mirra_free_shipping_enabled",
+        "label": "Mostrar barra de frete grátis no carrinho",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "mirra_free_shipping_threshold",
+        "label": "Valor mínimo para frete grátis (R$)",
+        "info": "Use o mesmo valor configurado em Configurações › Frete e entrega.",
+        "default": 199
+      },
+      {
+        "type": "header",
+        "content": "Parcelamento"
+      },
+      {
+        "type": "range",
+        "id": "mirra_installments",
+        "label": "Parcelas sem juros",
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "default": 6,
+        "info": "Exibido na página de produto pelo bloco \"MIRRA — Parcelamento\"."
+      },
+      {
+        "type": "number",
+        "id": "mirra_installment_min",
+        "label": "Valor mínimo da parcela (R$)",
+        "default": 20
+      },
+      {
+        "type": "header",
+        "content": "Selos de produto"
+      },
+      {
+        "type": "text",
+        "id": "mirra_tag_new",
+        "label": "Tag para o selo \"Novo\"",
+        "default": "novo"
+      },
+      {
+        "type": "text",
+        "id": "mirra_tag_bestseller",
+        "label": "Tag para o selo \"Mais vendido\"",
+        "default": "mais-vendido"
+      },
+      {
+        "type": "range",
+        "id": "mirra_low_stock_threshold",
+        "label": "Mostrar \"Últimas unidades\" com estoque até",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "default": 5,
+        "info": "Só funciona em produtos com estoque rastreado."
+      },
+      {
+        "type": "header",
+        "content": "Movimento"
+      },
+      {
+        "type": "checkbox",
+        "id": "mirra_tilt_frames",
+        "label": "Inclinar levemente molduras e selos",
+        "default": true
       }
     ]
   },

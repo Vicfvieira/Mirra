@@ -1,0 +1,222 @@
+{{ 'mirra-newsletter.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mirra-copy.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign form_id = 'MirraNewsletter-' | append: section.id
+  assign coupon = section.settings.coupon_code | strip
+-%}
+
+<section
+  class="mirra-section mirra-newsletter color-{{ section.settings.color_scheme }} gradient"
+  style="--mirra-pt: {{ section.settings.padding_top }}px; --mirra-pb: {{ section.settings.padding_bottom }}px;"
+  aria-labelledby="MirraNewsletterTitle-{{ section.id }}"
+>
+  <div class="page-width">
+    <div class="mirra-newsletter__box color-{{ section.settings.box_color_scheme }} gradient{% if section.settings.image != blank %} mirra-newsletter__box--image{% endif %}">
+      <div class="mirra-newsletter__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="mirra-eyebrow">
+            {%- render 'mirra-icon', icon: 'presente', size: 18 -%}
+            {{ section.settings.eyebrow }}
+          </p>
+        {%- endif -%}
+        <h2 id="MirraNewsletterTitle-{{ section.id }}" class="mirra-title mirra-title--lg">
+          {{- section.settings.heading -}}
+        </h2>
+        {%- if section.settings.text != blank -%}
+          <div class="mirra-lead mirra-richtext">{{ section.settings.text }}</div>
+        {%- endif -%}
+
+        {%- form 'customer', id: form_id, class: 'mirra-newsletter__form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          {%- if form.posted_successfully? -%}
+            <div
+              class="mirra-newsletter__success"
+              id="MirraNewsletterSuccess-{{ section.id }}"
+              tabindex="-1"
+              role="status"
+              autofocus
+            >
+              <p class="mirra-newsletter__success-text">
+                {%- render 'mirra-icon', icon: 'check', size: 20 -%}
+                {{ 'mirra.newsletter.success' | t }}
+              </p>
+              {%- if coupon != blank -%}
+                {%- render 'mirra-coupon', code: coupon -%}
+              {%- endif -%}
+            </div>
+          {%- else -%}
+            <div class="mirra-newsletter__field">
+              <label class="mirra-visually-hidden" for="MirraNewsletterEmail-{{ section.id }}">
+                {{- 'mirra.newsletter.email_label' | t -}}
+              </label>
+              <input
+                id="MirraNewsletterEmail-{{ section.id }}"
+                type="email"
+                name="contact[email]"
+                class="mirra-newsletter__input"
+                value="{{ form.email }}"
+                autocomplete="email"
+                autocapitalize="off"
+                autocorrect="off"
+                placeholder="{{ section.settings.placeholder | escape }}"
+                required
+                aria-required="true"
+                {% if form.errors %}
+                  aria-invalid="true"
+                  aria-describedby="MirraNewsletterError-{{ section.id }}"
+                {% endif %}
+              >
+              <button type="submit" class="button mirra-button--accent mirra-newsletter__submit" name="commit">
+                {{- section.settings.button_label | escape -}}
+              </button>
+            </div>
+            {%- if form.errors -%}
+              <p class="mirra-newsletter__error" id="MirraNewsletterError-{{ section.id }}" role="alert">
+                {{- form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email -}}
+              </p>
+            {%- endif -%}
+            {%- if section.settings.show_coupon_upfront and coupon != blank -%}
+              <div class="mirra-newsletter__teaser">
+                <span>{{ section.settings.coupon_label }}</span>
+                {%- render 'mirra-coupon', code: coupon -%}
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endform -%}
+
+        {%- if section.settings.fineprint != blank -%}
+          <div class="mirra-newsletter__fineprint mirra-richtext">{{ section.settings.fineprint }}</div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.image != blank -%}
+        <div class="mirra-newsletter__media">
+          {%- render 'mirra-framed-image',
+            image: section.settings.image,
+            ratio: 'square',
+            sizes: '(min-width: 990px) 30vw, 80vw',
+            tilt: true
+          -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MIRRA — Newsletter",
+  "tag": "div",
+  "class": "mirra-newsletter-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Os e-mails cadastrados aparecem em Clientes, com a tag \"newsletter\". Crie o cupom em Descontos com o mesmo código abaixo."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Chamada acima do título",
+      "default": "Clube MIRRA"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "default": "Ganhe <em>10% off</em> no primeiro ritual"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Receba lançamentos, receitas de autocuidado e ofertas antes de todo mundo. Prometemos poucos e-mails — e bons.</p>"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Texto do campo de e-mail",
+      "default": "seu@email.com"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto do botão",
+      "default": "Quero meu cupom"
+    },
+    {
+      "type": "header",
+      "content": "Cupom"
+    },
+    {
+      "type": "text",
+      "id": "coupon_code",
+      "label": "Código do cupom",
+      "default": "BEMVINDA10"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_coupon_upfront",
+      "label": "Mostrar o cupom antes do cadastro",
+      "info": "Desativado: o cupom aparece só depois que a pessoa se cadastra.",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "coupon_label",
+      "label": "Texto ao lado do cupom (quando visível antes)",
+      "default": "Use na primeira compra:"
+    },
+    {
+      "type": "richtext",
+      "id": "fineprint",
+      "label": "Letras miúdas",
+      "default": "<p>Válido para a primeira compra. Você pode cancelar a inscrição quando quiser.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagem (opcional)",
+      "info": "Recomendado: 1000 × 1000 px (1:1)."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cores da seção",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "box_color_scheme",
+      "label": "Esquema de cores da caixa",
+      "default": "scheme-3"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço superior",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço inferior",
+      "default": 96
+    }
+  ],
+  "presets": [
+    {
+      "name": "MIRRA — Newsletter"
+    }
+  ]
+}
+{% endschema %}

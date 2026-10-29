@@ -1,0 +1,175 @@
+{{ 'mirra-pages.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign heading = section.settings.heading
+  if heading == blank
+    assign heading = page.title | escape
+  endif
+-%}
+
+<section
+  class="mirra-section mirra-page-hero color-{{ section.settings.color_scheme }} gradient{% if section.settings.image != blank %} mirra-page-hero--image{% endif %} mirra-page-hero--{{ section.settings.alignment }}"
+  style="--mirra-pt: {{ section.settings.padding_top }}px; --mirra-pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width mirra-page-hero__grid">
+    <div class="mirra-page-hero__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="mirra-eyebrow">
+          {%- render 'mirra-icon', icon: section.settings.icon, size: 18 -%}
+          {{ section.settings.eyebrow }}
+        </p>
+      {%- endif -%}
+      <h1 class="mirra-title mirra-title--{{ section.settings.heading_size }}">{{ heading }}</h1>
+      {%- if section.settings.text != blank -%}
+        <div class="mirra-lead mirra-richtext">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.blocks.size > 0 -%}
+        <ul class="mirra-pill-list" role="list">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>
+              {%- render 'mirra-pill', text: block.settings.text, icon: block.settings.icon -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.image != blank -%}
+      <div class="mirra-page-hero__media">
+        {%- render 'mirra-framed-image',
+          image: section.settings.image,
+          ratio: 'landscape',
+          sizes: '(min-width: 990px) 40vw, 90vw',
+          lazy: false,
+          tilt: true
+        -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MIRRA — Topo de página",
+  "tag": "div",
+  "class": "mirra-page-hero-section",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Chamada acima do título",
+      "default": "MIRRA"
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Ícone da chamada",
+      "options": [
+        { "value": "none", "label": "Nenhum" },
+        { "value": "gota", "label": "Gota" },
+        { "value": "folha", "label": "Folha" },
+        { "value": "chama", "label": "Chama" },
+        { "value": "brilho", "label": "Brilho" }
+      ],
+      "default": "brilho"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "info": "Se vazio, usa o título da página. Itálico = palavra em mel."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Tamanho do título",
+      "options": [
+        { "value": "md", "label": "Médio" },
+        { "value": "lg", "label": "Grande" },
+        { "value": "xl", "label": "Gigante" }
+      ],
+      "default": "xl"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagem (opcional)",
+      "info": "Recomendado: 1600 × 1067 px (3:2)."
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alinhamento (sem imagem)",
+      "options": [
+        { "value": "left", "label": "Esquerda" },
+        { "value": "center", "label": "Centro" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cores",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço superior",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço inferior",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pill",
+      "name": "Selo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Feito à mão"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Ícone",
+          "options": [
+            { "value": "none", "label": "Nenhum" },
+            { "value": "gota", "label": "Gota" },
+            { "value": "folha", "label": "Folha" },
+            { "value": "chama", "label": "Chama" },
+            { "value": "coracao", "label": "Coração" },
+            { "value": "brilho", "label": "Brilho" }
+          ],
+          "default": "none"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MIRRA — Topo de página"
+    }
+  ]
+}
+{% endschema %}

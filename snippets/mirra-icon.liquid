@@ -1,0 +1,97 @@
+{% comment %}
+  MIRRA — ícones próprios da marca (SVG inline, traço herdando currentColor).
+
+  Accepts:
+  - icon: {String} gota | folha | chama | presente | vela | casa | frasco | brilho | lua | coracao |
+          caminhao | mapa | cartao | troca | estrela | aspas | seta | seta-esquerda | seta-direita |
+          pausa | play | check | none
+  - class: {String} classe extra (opcional)
+  - size: {Number} tamanho em px (opcional, padrão 24)
+
+  Usage:
+  {% render 'mirra-icon', icon: 'gota', size: 32 %}
+{% endcomment %}
+
+{%- liquid
+  assign icon_size = size | default: 24
+-%}
+
+{%- unless icon == blank or icon == 'none' -%}
+  <svg
+    class="mirra-icon mirra-icon--{{ icon }}{% if class %} {{ class }}{% endif %}"
+    width="{{ icon_size }}"
+    height="{{ icon_size }}"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+    focusable="false"
+  >
+    {%- case icon -%}
+      {%- when 'gota' -%}
+        <path d="M12 2.8c3.4 4.3 6 7.9 6 11.2a6 6 0 0 1-12 0c0-3.3 2.6-6.9 6-11.2Z"/>
+        <path d="M9.2 14.6a2.9 2.9 0 0 0 2.6 2.6"/>
+      {%- when 'folha' -%}
+        <path d="M4.5 19.5C4 11 9 4.6 19.6 4.4c.3 10.4-6.1 15.6-15.1 15.1Z"/>
+        <path d="M4.5 19.5 14 10"/>
+        <path d="M9.6 14.4h4.2M9.6 14.4V10.2"/>
+      {%- when 'chama' -%}
+        <path d="M12 21.2a6.4 6.4 0 0 1-6.4-6.4c0-4 3-5.8 3.6-10 2 .9 3.4 2.6 3.8 4.6.9-.6 1.5-1.6 1.6-2.8 2.2 1.8 3.8 4.6 3.8 8.2a6.4 6.4 0 0 1-6.4 6.4Z"/>
+        <path d="M12 21.2a2.8 2.8 0 0 1-2.8-2.8c0-1.8 1.4-2.6 2.8-4.4 1.4 1.8 2.8 2.6 2.8 4.4a2.8 2.8 0 0 1-2.8 2.8Z"/>
+      {%- when 'presente' -%}
+        <rect x="3.5" y="8.5" width="17" height="4" rx="1"/>
+        <path d="M5 12.5v7.5h14v-7.5M12 8.5V20"/>
+        <path d="M12 8.5C10.6 5 7.2 4.6 7.2 6.6c0 1.6 2.6 1.9 4.8 1.9ZM12 8.5c1.4-3.5 4.8-3.9 4.8-1.9 0 1.6-2.6 1.9-4.8 1.9Z"/>
+      {%- when 'vela' -%}
+        <path d="M7.5 10.5h9v10h-9z"/>
+        <path d="M5.5 20.5h13"/>
+        <path d="M12 10.5V8.6"/>
+        <path d="M12 8.6c-1.2-.8-1.5-2-.6-3.5L12 3.5l.6 1.6c.9 1.5.6 2.7-.6 3.5Z"/>
+      {%- when 'casa' -%}
+        <path d="M4 10.6 12 4l8 6.6V20H4z"/>
+        <path d="M9.6 20v-5.2h4.8V20"/>
+      {%- when 'frasco' -%}
+        <path d="M10 3.5h4v3h-4z"/>
+        <path d="M9.4 6.5h5.2l1.4 2.4V20a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V8.9Z"/>
+        <path d="M8 12.5h8"/>
+      {%- when 'brilho' -%}
+        <path d="M12 3.5c.7 4.4 2.1 5.8 6.5 6.5-4.4.7-5.8 2.1-6.5 6.5-.7-4.4-2.1-5.8-6.5-6.5 4.4-.7 5.8-2.1 6.5-6.5Z"/>
+        <path d="M18.5 16v4M16.5 18h4"/>
+      {%- when 'lua' -%}
+        <path d="M19.5 14.6A8 8 0 1 1 9.4 4.5a6.4 6.4 0 0 0 10.1 10.1Z"/>
+      {%- when 'coracao' -%}
+        <path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10Z"/>
+      {%- when 'caminhao' -%}
+        <path d="M2.8 6.5h11v9.5h-11zM13.8 9.5h4.1l3.3 3.4V16h-7.4"/>
+        <circle cx="7" cy="17.4" r="1.9"/>
+        <circle cx="17.2" cy="17.4" r="1.9"/>
+      {%- when 'mapa' -%}
+        <path d="M12 21s-6.2-5.6-6.2-10.8a6.2 6.2 0 0 1 12.4 0C18.2 15.4 12 21 12 21Z"/>
+        <circle cx="12" cy="10.2" r="2.3"/>
+      {%- when 'cartao' -%}
+        <rect x="2.8" y="5.5" width="18.4" height="13" rx="2"/>
+        <path d="M2.8 9.6h18.4M6.4 14.8h3.6"/>
+      {%- when 'troca' -%}
+        <path d="M4.5 9h13l-3.2-3.2M19.5 15h-13l3.2 3.2"/>
+      {%- when 'estrela' -%}
+        <path fill="currentColor" stroke="none" d="m12 3.6 2.5 5.3 5.8.7-4.3 4 1.1 5.8L12 16.6l-5.1 2.8L8 13.6l-4.3-4 5.8-.7Z"/>
+      {%- when 'aspas' -%}
+        <path fill="currentColor" stroke="none" d="M4 17.5v-4.6C4 8.8 5.8 6.3 9.5 5.5l.7 1.6C8.3 7.8 7.4 9.2 7.3 11.2H10v6.3Zm9.7 0v-4.6c0-4.1 1.8-6.6 5.5-7.4l.7 1.6c-1.9.7-2.8 2.1-2.9 4.1h2.7v6.3Z"/>
+      {%- when 'seta' -%}
+        <path d="M3.5 12h16M14 6.5l5.5 5.5-5.5 5.5"/>
+      {%- when 'seta-esquerda' -%}
+        <path d="M15 5.5 8.5 12l6.5 6.5"/>
+      {%- when 'seta-direita' -%}
+        <path d="m9 5.5 6.5 6.5L9 18.5"/>
+      {%- when 'pausa' -%}
+        <path d="M9 6v12M15 6v12"/>
+      {%- when 'play' -%}
+        <path fill="currentColor" d="M8 5.5v13l10.5-6.5Z"/>
+      {%- when 'check' -%}
+        <path d="m5 12.5 4.4 4.4L19 7.3"/>
+    {%- endcase -%}
+  </svg>
+{%- endunless -%}

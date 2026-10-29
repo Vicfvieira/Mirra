@@ -1,0 +1,292 @@
+/* ==========================================================================
+   MIRRA — base da marca
+   Todas as cores vêm de variáveis dos esquemas de cor (theme.liquid +
+   mirra-theme-tokens). Nada de cor fixa aqui.
+   ========================================================================== */
+
+/* ---------- Títulos editoriais ---------- */
+.mirra-title {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-style: var(--font-heading-style);
+  color: rgb(var(--color-foreground));
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  margin: 0;
+  text-wrap: balance;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.mirra-title em,
+.mirra-title i,
+.mirra-accent-word {
+  font-style: var(--mirra-font-heading-italic-style);
+  color: rgb(var(--mirra-accent));
+  letter-spacing: -0.01em;
+}
+
+.mirra-title--md {
+  font-size: clamp(3.2rem, 2.4rem + 2.6vw, 5.6rem);
+}
+
+.mirra-title--lg {
+  font-size: clamp(4rem, 2.6rem + 4.4vw, 8rem);
+}
+
+.mirra-title--xl {
+  font-size: clamp(4.6rem, 2.4rem + 7.4vw, 12.8rem);
+  line-height: 0.9;
+}
+
+.mirra-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0 0 1.6rem;
+  font-size: 1.3rem;
+  font-weight: var(--font-body-weight-bold);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(var(--color-foreground));
+}
+
+.mirra-lead {
+  font-size: clamp(1.6rem, 1.4rem + 0.4vw, 2rem);
+  line-height: 1.55;
+  color: rgba(var(--color-foreground), 0.85);
+  max-width: 56ch;
+}
+
+.mirra-lead > *:first-child {
+  margin-top: 0;
+}
+
+.mirra-lead > *:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Seção ---------- */
+.mirra-section {
+  position: relative;
+  padding-top: calc(var(--mirra-pt, 64px) * 0.65);
+  padding-bottom: calc(var(--mirra-pb, 64px) * 0.65);
+}
+
+@media screen and (min-width: 750px) {
+  .mirra-section {
+    padding-top: var(--mirra-pt, 64px);
+    padding-bottom: var(--mirra-pb, 64px);
+  }
+}
+
+.mirra-section__header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin-bottom: 3.2rem;
+}
+
+.mirra-section__header--center {
+  align-items: center;
+  text-align: center;
+}
+
+.mirra-section__header--center .mirra-lead {
+  margin-inline: auto;
+}
+
+@media screen and (min-width: 990px) {
+  .mirra-section__header--split {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 4rem;
+  }
+}
+
+/* ---------- Selo em pílula ---------- */
+.mirra-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1.4rem;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  font-weight: var(--font-body-weight-bold);
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  max-width: 100%;
+  color: rgb(var(--color-foreground));
+  background: rgb(var(--color-background));
+}
+
+.mirra-pill .mirra-icon {
+  flex-shrink: 0;
+}
+
+.mirra-pill--solid {
+  background: rgb(var(--color-button));
+  border-color: rgb(var(--color-button));
+  color: rgb(var(--color-button-text));
+}
+
+.mirra-pill--accent {
+  background: rgb(var(--mirra-highlight));
+  border-color: rgb(var(--mirra-highlight-label));
+  color: rgb(var(--mirra-highlight-label));
+}
+
+.mirra-pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* ---------- Moldura neo-brutalista ---------- */
+.mirra-frame {
+  position: relative;
+  border: var(--mirra-frame-width) solid rgb(var(--color-foreground));
+  border-radius: var(--mirra-frame-radius);
+  box-shadow: var(--mirra-frame-shadow-x) var(--mirra-frame-shadow-y) 0 0 rgb(var(--color-shadow));
+  background: rgb(var(--color-background-contrast, var(--color-background)));
+  overflow: hidden;
+}
+
+.mirra-frame__inner {
+  position: relative;
+  padding-bottom: var(--mirra-frame-ratio, 125%);
+}
+
+.mirra-frame__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mirra-frame .placeholder-svg {
+  background: rgba(var(--color-foreground), 0.06);
+  fill: rgba(var(--color-foreground), 0.45);
+}
+
+.mirra-frame--tilt {
+  transform: rotate(var(--mirra-tilt));
+}
+
+/* ---------- Divisor ondulado ---------- */
+.mirra-wave {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mirra-wave--flip {
+  transform: scaleX(-1);
+}
+
+/* ---------- Botões da marca ---------- */
+.mirra-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.mirra-buttons .button {
+  margin: 0;
+}
+
+.button.mirra-button--accent {
+  --color-button: var(--mirra-highlight);
+  --color-button-text: var(--mirra-highlight-label);
+}
+
+.mirra-link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-weight: var(--font-body-weight-bold);
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 0.2rem;
+}
+
+.mirra-link-arrow .mirra-icon {
+  transition: transform 0.25s ease;
+}
+
+.mirra-link-arrow:hover .mirra-icon {
+  transform: translateX(0.4rem);
+}
+
+/* ---------- Campo de texto em pílula ---------- */
+.mirra-input {
+  width: 100%;
+  min-height: 5.6rem;
+  padding: 0 2.4rem;
+  border: 2px solid rgb(var(--color-foreground));
+  border-radius: 999px;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  font: inherit;
+  font-size: 1.6rem;
+}
+
+.mirra-input::placeholder {
+  color: rgba(var(--color-foreground), 0.65);
+}
+
+/* ---------- Foco visível (AA) ---------- */
+.mirra-section a:focus-visible,
+.mirra-section button:focus-visible,
+.mirra-section summary:focus-visible,
+.mirra-section input:focus-visible,
+.mirra-focus:focus-visible {
+  outline: 3px solid rgb(var(--color-foreground));
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgb(var(--color-background));
+}
+
+/* ---------- Utilitários ---------- */
+.mirra-visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.mirra-richtext > *:first-child {
+  margin-top: 0;
+}
+
+.mirra-richtext > *:last-child {
+  margin-bottom: 0;
+}
+
+.mirra-richtext a {
+  color: rgb(var(--color-foreground));
+  text-underline-offset: 0.3rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mirra-frame--tilt {
+    transform: none;
+  }
+
+  .mirra-link-arrow .mirra-icon {
+    transition: none;
+  }
+}

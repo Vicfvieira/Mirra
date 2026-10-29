@@ -1,0 +1,495 @@
+/* ==========================================================================
+   MIRRA — pele da marca sobre componentes do Dawn
+   Só sobrescreve aparência; não altera estrutura nem JS do Dawn.
+   ========================================================================== */
+
+/* ---------- Tipografia global ---------- */
+h1,
+h2,
+h3,
+.h0,
+.h1,
+.h2,
+.h3,
+.hxl,
+.hxxl {
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+}
+
+h4,
+h5,
+.h4,
+.h5 {
+  letter-spacing: 0;
+}
+
+.title em,
+.title i,
+h1 em,
+h2 em,
+.h1 em,
+.h2 em {
+  font-style: var(--mirra-font-heading-italic-style);
+  color: rgb(var(--mirra-accent));
+}
+
+body {
+  color: rgba(var(--color-foreground), 0.88);
+}
+
+::selection {
+  background: rgb(var(--mirra-highlight));
+  color: rgb(var(--mirra-highlight-label));
+}
+
+/* ---------- Botões ---------- */
+.button,
+.shopify-challenge__button,
+.customer button {
+  font-weight: var(--font-body-weight-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  min-height: 4.8rem;
+  padding-inline: 3.2rem;
+}
+
+.button--small {
+  min-height: 3.8rem;
+  padding-inline: 2rem;
+}
+
+.button:not([disabled]):hover::after {
+  --border-offset: 0.3rem;
+}
+
+/* ---------- Header ---------- */
+.header-wrapper {
+  border-bottom: 2px solid rgb(var(--color-foreground));
+}
+
+.header__heading-link {
+  padding: 0.4rem 0.8rem;
+}
+
+.header__heading-link .h2 {
+  font-size: clamp(2.8rem, 2rem + 1.6vw, 3.6rem);
+  letter-spacing: 0.12em;
+  line-height: 1;
+}
+
+.header__menu-item {
+  font-weight: var(--font-body-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+}
+
+.header__active-menu-item {
+  text-decoration-color: rgb(var(--mirra-highlight));
+  text-decoration-thickness: 0.3rem;
+  text-underline-offset: 0.6rem;
+}
+
+.header__menu-item:hover span {
+  text-decoration-thickness: 0.2rem;
+  text-underline-offset: 0.6rem;
+}
+
+.cart-count-bubble {
+  background-color: rgb(var(--mirra-highlight));
+  color: rgb(var(--mirra-highlight-label));
+  font-weight: var(--font-body-weight-bold);
+  border: 1.5px solid rgb(var(--color-foreground));
+}
+
+.header__submenu,
+.mega-menu__content {
+  border: 2px solid rgb(var(--color-foreground));
+}
+
+.menu-drawer {
+  border-right: 2px solid rgb(var(--color-foreground));
+}
+
+.menu-drawer__menu-item {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: 2.6rem;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Badges (Dawn + MIRRA) ---------- */
+.badge {
+  border: 1.5px solid rgb(var(--color-foreground));
+  font-weight: var(--font-body-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+.card__badge {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  z-index: 2;
+}
+
+/* ---------- Cards de produto ---------- */
+.card-wrapper .card__heading {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: 2rem;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.card--card .card__inner .card__media {
+  border-bottom: var(--product-card-border-width) solid rgb(var(--color-foreground));
+}
+
+.card .price {
+  font-weight: var(--font-body-weight-bold);
+  color: rgb(var(--color-foreground));
+}
+
+.price--on-sale .price-item--regular {
+  color: rgba(var(--color-foreground), 0.65);
+}
+
+.price .price-item--sale {
+  color: rgb(var(--mirra-accent));
+}
+
+.card--card {
+  border-color: rgb(var(--color-foreground));
+}
+
+.card-wrapper:hover .card--card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.quick-add__submit {
+  border-radius: var(--buttons-radius);
+}
+
+/* ---------- Formulários ---------- */
+.field__input,
+.select__select,
+.customer .field input,
+.customer select {
+  font-size: 1.5rem;
+}
+
+/* ---------- Coleção: banner e filtros ---------- */
+.collection-hero__title {
+  font-size: clamp(4.4rem, 2.6rem + 5vw, 9.6rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.collection-hero__description {
+  font-size: 1.8rem;
+  max-width: 60ch;
+}
+
+.facets__summary,
+.mobile-facets__open,
+.facet-filters__label,
+.product-count__text {
+  font-weight: var(--font-body-weight-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+}
+
+.facets__disclosure .facets__summary {
+  padding: 0.8rem 1.6rem;
+  border: 1.5px solid rgb(var(--color-foreground));
+  border-radius: 999px;
+}
+
+.facets__disclosure[open] .facets__summary {
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+
+.facets__display,
+.mobile-facets__inner {
+  border: 2px solid rgb(var(--color-foreground));
+  border-radius: 1.2rem;
+  box-shadow: 6px 6px 0 rgb(var(--color-shadow));
+}
+
+.facets__display {
+  top: calc(100% + 0.8rem);
+}
+
+.facet-checkbox > svg {
+  border-radius: 0.4rem;
+}
+
+.facet-checkbox input[type='checkbox']:checked + svg {
+  background-color: rgb(var(--mirra-highlight));
+}
+
+.active-facets__button-inner {
+  border: 1.5px solid rgb(var(--color-foreground));
+  box-shadow: none;
+  font-weight: var(--font-body-weight-bold);
+}
+
+.active-facets__button:hover .active-facets__button-inner {
+  background: rgb(var(--mirra-highlight));
+  color: rgb(var(--mirra-highlight-label));
+}
+
+.facet-filters__field .select__select,
+.facets__price .field__input {
+  border-radius: 999px;
+}
+
+.pagination__item--current::after {
+  height: 0.3rem;
+  background-color: rgb(var(--mirra-highlight));
+}
+
+/* ---------- Produto ---------- */
+.product__title h1,
+.product__title .h1 {
+  font-size: clamp(3.6rem, 2.6rem + 2.4vw, 5.6rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.product .price--large {
+  font-size: 2.2rem;
+  font-weight: var(--font-body-weight-bold);
+}
+
+.product-form__submit {
+  min-height: 5.6rem;
+}
+
+.product-form__input input[type='radio'] + label {
+  font-weight: var(--font-body-weight-bold);
+}
+
+.product-form__input input[type='radio']:checked + label {
+  background-color: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+
+.product__media-item .product__media,
+.product__media-list .product-media-container {
+  border-radius: var(--media-radius);
+}
+
+.product__media-list {
+  gap: 2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .product__media-list {
+    padding-right: max(var(--media-shadow-horizontal-offset), 0px);
+  }
+}
+
+.thumbnail[aria-current] {
+  box-shadow: 0 0 0 0.3rem rgb(var(--mirra-highlight));
+  border-color: rgb(var(--color-foreground));
+}
+
+/* Acordeões (modo de uso, ingredientes, envio) */
+.product__accordion.accordion,
+.accordion {
+  border-top: 2px solid rgb(var(--color-foreground));
+  border-bottom: 2px solid rgb(var(--color-foreground));
+}
+
+.accordion + .accordion {
+  border-top: 0;
+}
+
+.accordion__title {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: 2rem;
+  letter-spacing: -0.005em;
+}
+
+.accordion summary {
+  padding: 1.8rem 0;
+}
+
+.accordion .summary__title .icon-accordion {
+  fill: rgb(var(--mirra-accent));
+}
+
+.accordion__content {
+  font-size: 1.5rem;
+  line-height: 1.7;
+}
+
+/* ---------- Gaveta do carrinho ---------- */
+.drawer__inner {
+  border-left: 2px solid rgb(var(--color-foreground));
+}
+
+.drawer__heading {
+  font-size: 3.2rem;
+  letter-spacing: -0.02em;
+}
+
+.cart-item__name {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: 1.8rem;
+  letter-spacing: -0.005em;
+}
+
+.cart-item__image {
+  border: 1.5px solid rgb(var(--color-foreground));
+  border-radius: 0.8rem;
+}
+
+.totals__total-value {
+  font-weight: var(--font-body-weight-bold);
+  color: rgb(var(--color-foreground));
+}
+
+.quantity {
+  border-radius: 999px;
+}
+
+.quantity::after,
+.quantity::before {
+  border-radius: 999px;
+}
+
+/* ---------- Títulos de seções Dawn (relacionados, etc.) ---------- */
+.related-products__heading,
+.title-wrapper .title {
+  font-size: clamp(3.2rem, 2.4rem + 2.4vw, 5.6rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* ---------- Página genérica / contato ---------- */
+.main-page-title {
+  font-size: clamp(4rem, 2.6rem + 4vw, 8rem);
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+
+.contact .field__input,
+.contact .text-area {
+  border-radius: 1.2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-wrapper:hover .card--card {
+    transition: none;
+  }
+}
+
+/* ---------- Selos MIRRA nos cards ---------- */
+.mirra-badge--new {
+  background: rgb(var(--mirra-highlight));
+  color: rgb(var(--mirra-highlight-label));
+  border-color: rgb(var(--mirra-highlight-label));
+}
+
+.mirra-badge--best {
+  background: rgb(var(--color-button));
+  color: rgb(var(--color-button-text));
+  border-color: rgb(var(--color-button-text));
+}
+
+.mirra-badge--low {
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  border-style: dashed;
+}
+
+/* ---------- Barra de frete grátis (gaveta e página do carrinho) ---------- */
+.mirra-shipping {
+  margin: 0 0 1.6rem;
+  padding: 1.4rem 1.6rem;
+  border: 1.5px solid rgb(var(--color-foreground));
+  border-radius: 1.2rem;
+  background: rgba(var(--mirra-highlight), 0.14);
+}
+
+.drawer__inner .mirra-shipping {
+  margin-top: 0.4rem;
+}
+
+.mirra-shipping__text {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0 0 1rem;
+  font-size: 1.4rem;
+  line-height: 1.4;
+  color: rgb(var(--color-foreground));
+}
+
+.mirra-shipping__text .mirra-icon {
+  flex-shrink: 0;
+}
+
+.mirra-shipping__track {
+  position: relative;
+  height: 1rem;
+  border: 1.5px solid rgb(var(--color-foreground));
+  border-radius: 999px;
+  background: rgb(var(--color-background));
+  overflow: hidden;
+}
+
+.mirra-shipping__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgb(var(--mirra-highlight)) 0 0.6rem,
+    rgba(var(--mirra-highlight), 0.75) 0.6rem 1.2rem
+  );
+  border-right: 1.5px solid rgb(var(--color-foreground));
+  transition: width 0.4s ease;
+}
+
+.mirra-shipping--done .mirra-shipping__fill {
+  background: rgb(var(--color-button));
+  border-right: 0;
+}
+
+/* ---------- Banner de coleção ---------- */
+.collection-hero__inner {
+  padding-top: 4.8rem;
+  padding-bottom: 1.6rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mirra-shipping__fill {
+    transition: none;
+  }
+}
+
+/* ---------- Acordeão MIRRA (produto) ---------- */
+.mirra-accordion .summary__title {
+  align-items: center;
+}
+
+.mirra-accordion__icon {
+  display: inline-flex;
+  margin-right: 1rem;
+  color: rgb(var(--mirra-accent));
+}
+
+.mirra-accordion__icon:empty {
+  display: none;
+}

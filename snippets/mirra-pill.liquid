@@ -1,0 +1,25 @@
+{% comment %}
+  MIRRA — selo em pílula com contorno fino.
+
+  Accepts:
+  - text: {String} texto do selo
+  - icon: {String} ícone opcional (ver mirra-icon)
+  - style: {String} 'outline' (padrão) | 'solid' | 'accent'
+  - class: {String} classe extra (opcional)
+  - tag: {String} elemento HTML (padrão 'span')
+
+  Usage:
+  {% render 'mirra-pill', text: '100% vegano', icon: 'folha' %}
+{% endcomment %}
+
+{%- liquid
+  assign pill_tag = tag | default: 'span'
+  assign pill_style = style | default: 'outline'
+-%}
+
+{%- if text != blank -%}
+  <{{ pill_tag }} class="mirra-pill mirra-pill--{{ pill_style }}{% if class %} {{ class }}{% endif %}">
+    {%- render 'mirra-icon', icon: icon, size: 16 -%}
+    <span>{{ text }}</span>
+  </{{ pill_tag }}>
+{%- endif -%}

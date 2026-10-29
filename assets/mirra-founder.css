@@ -1,0 +1,110 @@
+.mirra-founder__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 4.8rem;
+  align-items: center;
+}
+
+.mirra-founder__media {
+  position: relative;
+  width: min(100%, 48rem);
+  margin-inline: auto;
+  padding: 1.6rem var(--mirra-frame-shadow-x) var(--mirra-frame-shadow-y) 1.2rem;
+}
+
+.mirra-founder__caption {
+  position: absolute;
+  bottom: -0.4rem;
+  right: 0;
+  z-index: 2;
+  transform: rotate(calc(var(--mirra-tilt) * -2));
+  box-shadow: 3px 3px 0 rgb(var(--color-foreground));
+}
+
+.mirra-founder__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.4rem;
+}
+
+.mirra-founder__quote {
+  position: relative;
+  margin: 0;
+  padding: 0 0 0 2rem;
+  border-left: 4px solid rgb(var(--mirra-highlight));
+}
+
+.mirra-founder__quote p {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-style: var(--mirra-font-heading-italic-style);
+  font-size: clamp(2rem, 1.6rem + 1vw, 2.8rem);
+  line-height: 1.3;
+  color: rgb(var(--color-foreground));
+}
+
+.mirra-founder__quote-icon {
+  color: rgb(var(--mirra-accent));
+  margin-bottom: 0.8rem;
+}
+
+.mirra-founder__signature {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.mirra-founder__signature-img {
+  width: 24rem;
+  max-width: 100%;
+  height: auto;
+}
+
+.mirra-founder__signature-text {
+  font-family: var(--font-heading-family);
+  font-style: var(--mirra-font-heading-italic-style);
+  font-weight: var(--font-heading-weight);
+  font-size: 4rem;
+  line-height: 1;
+  color: rgb(var(--mirra-accent));
+  transform: rotate(var(--mirra-tilt));
+  transform-origin: left center;
+}
+
+.mirra-founder__name {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+.mirra-founder__name strong {
+  color: rgb(var(--color-foreground));
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 990px) {
+  .mirra-founder__grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 8rem;
+  }
+
+  .mirra-founder--image-right .mirra-founder__media {
+    order: 2;
+  }
+
+  .mirra-founder__media {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mirra-founder__caption,
+  .mirra-founder__signature-text {
+    transform: none;
+  }
+}

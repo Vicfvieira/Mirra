@@ -1,10 +1,56 @@
 {
   "sections": {
     "main": {
-      "type": "main-404"
+      "type": "mirra-404",
+      "settings": {
+        "icon": "gota",
+        "heading": "Essa página <em>evaporou</em>.",
+        "text": "<p>Como um óleo essencial esquecido sem tampa. Tente buscar o que procura ou volte para um lugar conhecido.</p>",
+        "show_search": true,
+        "search_placeholder": "Busque por vela, óleo, kit…",
+        "button_label_1": "Ver todos os produtos",
+        "button_link_1": "shopify://collections/all",
+        "button_label_2": "Voltar para o início",
+        "button_link_2": "",
+        "color_scheme": "scheme-2",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "wave": {
+      "type": "mirra-wave-divider",
+      "settings": {
+        "color_scheme_top": "scheme-2",
+        "color_scheme_bottom": "scheme-1",
+        "shape": "ondas",
+        "flip": false,
+        "height": 56
+      }
+    },
+    "bestsellers": {
+      "type": "mirra-featured-products",
+      "settings": {
+        "eyebrow": "Enquanto isso",
+        "heading": "Que tal um <em>ritual</em>?",
+        "collection": "mais-vendidos",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "image_ratio": "portrait",
+        "show_secondary_image": true,
+        "show_rating": false,
+        "enable_quick_add": true,
+        "view_all_label": "Ver todos",
+        "view_all_link": "shopify://collections/all",
+        "color_scheme": "scheme-1",
+        "padding_top": 48,
+        "padding_bottom": 96
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "wave",
+    "bestsellers"
   ]
 }

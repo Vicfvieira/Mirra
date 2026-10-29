@@ -1,0 +1,35 @@
+.mirra-featured-products__grid {
+  padding-right: var(--product-card-shadow-horizontal-offset, 0);
+  padding-bottom: var(--product-card-shadow-vertical-offset, 0);
+}
+
+.mirra-featured-products .card__heading {
+  font-size: clamp(1.7rem, 1.5rem + 0.4vw, 2.2rem);
+}
+
+.mirra-featured-products .quick-add {
+  margin-top: 1.2rem;
+}
+
+.mirra-featured-products .quick-add__submit {
+  min-height: 4.4rem;
+  font-size: 1.25rem;
+  padding-inline: 1.2rem;
+}
+
+@media screen and (max-width: 749px) {
+  .mirra-featured-products .card__heading {
+    font-size: 1.6rem;
+  }
+
+  .mirra-featured-products .card__information {
+    padding-inline: 1rem;
+  }
+
+  .mirra-featured-products .quick-add__submit {
+    min-height: 4rem;
+    padding-inline: 0.8rem;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+  }
+}

@@ -142,6 +142,7 @@
                   {{- 'products.product.on_sale' | t -}}
                 </span>
               {%- endif -%}
+              {%- render 'mirra-product-badges', product: card_product, max: 1 -%}
             </div>
           </div>
         </div>
@@ -566,6 +567,7 @@
                 {{- 'products.product.on_sale' | t -}}
               </span>
             {%- endif -%}
+            {%- render 'mirra-product-badges', product: card_product, max: 1 -%}
           </div>
         </div>
       </div>

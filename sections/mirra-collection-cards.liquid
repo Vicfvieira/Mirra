@@ -1,0 +1,226 @@
+{{ 'mirra-collection-cards.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="mirra-section mirra-collection-cards color-{{ section.settings.color_scheme }} gradient"
+  style="--mirra-pt: {{ section.settings.padding_top }}px; --mirra-pb: {{ section.settings.padding_bottom }}px;"
+  aria-labelledby="MirraCollectionsTitle-{{ section.id }}"
+>
+  <div class="page-width">
+    <div class="mirra-section__header mirra-section__header--split">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="mirra-eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 id="MirraCollectionsTitle-{{ section.id }}" class="mirra-title mirra-title--lg">
+          {{- section.settings.heading -}}
+        </h2>
+      </div>
+      {%- if section.settings.text != blank -%}
+        <div class="mirra-lead mirra-richtext">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    <ul class="mirra-collection-cards__grid" role="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign collection = block.settings.collection
+          assign card_title = block.settings.title
+          if card_title == blank and collection != blank
+            assign card_title = collection.title | escape
+          endif
+          assign card_url = block.settings.link
+          if card_url == blank and collection != blank
+            assign card_url = collection.url
+          endif
+          assign card_image = block.settings.image
+          if card_image == blank and collection.featured_image
+            assign card_image = collection.featured_image
+          endif
+        -%}
+        <li
+          class="mirra-collection-card color-{{ block.settings.color_scheme }} gradient{% if card_image != blank %} mirra-collection-card--has-image{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          <div class="mirra-collection-card__top">
+            <span class="mirra-collection-card__icon">
+              {%- render 'mirra-icon', icon: block.settings.icon, size: 40 -%}
+            </span>
+            {%- if block.settings.tag != blank -%}
+              {%- render 'mirra-pill', text: block.settings.tag -%}
+            {%- endif -%}
+          </div>
+
+          <h3 class="mirra-title mirra-title--md mirra-collection-card__title">
+            {%- if card_url != blank -%}
+              <a href="{{ card_url }}" class="mirra-collection-card__link">{{ card_title }}</a>
+            {%- else -%}
+              {{ card_title }}
+            {%- endif -%}
+          </h3>
+
+          {%- if block.settings.text != blank -%}
+            <p class="mirra-collection-card__text">{{ block.settings.text }}</p>
+          {%- endif -%}
+
+          {%- if card_image != blank -%}
+            <div class="mirra-collection-card__media">
+              {{
+                card_image
+                | image_url: width: 1200
+                | image_tag:
+                  widths: '360, 540, 720, 900, 1200',
+                  sizes: '(min-width: 990px) 30vw, (min-width: 750px) 45vw, 90vw',
+                  loading: 'lazy',
+                  alt: card_image.alt,
+                  class: 'mirra-collection-card__img'
+              }}
+            </div>
+          {%- endif -%}
+
+          {%- if block.settings.link_label != blank -%}
+            <span class="mirra-link-arrow mirra-collection-card__cta" aria-hidden="true">
+              {{- block.settings.link_label | escape -}}
+              {%- render 'mirra-icon', icon: 'seta', size: 20 -%}
+            </span>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MIRRA — Coleções",
+  "tag": "div",
+  "class": "mirra-collection-cards-section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Chamada acima do título",
+      "default": "Escolha seu ritual"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "info": "Use itálico para destacar uma palavra em mel.",
+      "default": "Para o corpo, a casa e <em>quem</em> você ama."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Três coleções pensadas para desacelerar: cuide da pele, perfume o ambiente e presenteie com intenção.</p>"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cores da seção",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço superior",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço inferior",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card de coleção",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Coleção",
+          "info": "Preenche título, link e imagem automaticamente se os campos abaixo ficarem vazios."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Corpo"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Óleos, esfoliantes e manteigas para a pele."
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Ícone",
+          "options": [
+            { "value": "gota", "label": "Gota" },
+            { "value": "folha", "label": "Folha" },
+            { "value": "chama", "label": "Chama" },
+            { "value": "vela", "label": "Vela" },
+            { "value": "presente", "label": "Presente" },
+            { "value": "casa", "label": "Casa" },
+            { "value": "frasco", "label": "Frasco" },
+            { "value": "lua", "label": "Lua" }
+          ],
+          "default": "gota"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Selo (opcional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagem (opcional)",
+          "info": "Recomendado: 1200 × 900 px (4:3)."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Texto do link",
+          "default": "Ver coleção"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "Esquema de cores do card",
+          "default": "scheme-2"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MIRRA — Coleções",
+      "blocks": [
+        { "type": "card", "settings": { "title": "Corpo", "icon": "gota", "color_scheme": "scheme-2", "text": "Óleos, esfoliantes e manteigas para a pele." } },
+        { "type": "card", "settings": { "title": "Casa", "icon": "chama", "color_scheme": "scheme-4", "text": "Velas e brumas para perfumar o ambiente." } },
+        { "type": "card", "settings": { "title": "Presentes", "icon": "presente", "color_scheme": "scheme-3", "text": "Kits prontos, embalados à mão." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

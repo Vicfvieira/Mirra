@@ -1,0 +1,213 @@
+.mirra-testimonials {
+  --mirra-ink: var(--color-foreground);
+}
+
+.mirra-testimonials__disclaimer {
+  margin: 1.6rem 0 0;
+}
+
+.mirra-carousel {
+  display: block;
+}
+
+.mirra-carousel__track {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 86%;
+  gap: 2rem;
+  margin: 0;
+  padding: 0.4rem var(--mirra-frame-shadow-x) calc(var(--mirra-frame-shadow-y) + 0.4rem) 0.4rem;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.mirra-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.mirra-carousel__track:focus-visible {
+  outline: 3px solid rgb(var(--color-foreground));
+  outline-offset: 4px;
+}
+
+.mirra-carousel__slide {
+  scroll-snap-align: start;
+  display: flex;
+}
+
+.mirra-testimonial {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  margin: 0;
+  padding: 2.8rem 2.4rem;
+  border: 2px solid rgb(var(--mirra-ink));
+  border-radius: var(--mirra-frame-radius);
+  box-shadow: calc(var(--mirra-frame-shadow-x) * 0.6) calc(var(--mirra-frame-shadow-y) * 0.6) 0 0 rgb(var(--mirra-ink));
+  color: rgb(var(--color-foreground));
+}
+
+.mirra-testimonial__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mirra-testimonial__quote-icon {
+  color: rgb(var(--mirra-accent));
+}
+
+.mirra-testimonial__rating {
+  display: inline-flex;
+  gap: 0.2rem;
+  color: rgb(var(--color-foreground));
+}
+
+.mirra-testimonial__quote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  flex: 1;
+}
+
+.mirra-testimonial__quote p {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: clamp(2rem, 1.7rem + 0.8vw, 2.6rem);
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  color: rgb(var(--color-foreground));
+}
+
+.mirra-testimonial__author {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+.mirra-testimonial__author strong {
+  display: block;
+  color: rgb(var(--color-foreground));
+}
+
+.mirra-testimonial__detail {
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.mirra-testimonial__avatar {
+  width: 5.6rem;
+  height: 5.6rem;
+  flex-shrink: 0;
+  border: 1.5px solid rgb(var(--color-foreground));
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.mirra-testimonial__avatar--initial {
+  display: grid;
+  place-items: center;
+  background: rgb(var(--mirra-highlight));
+  color: rgb(var(--mirra-highlight-label));
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: 2.4rem;
+}
+
+.mirra-carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  margin-top: 3.2rem;
+}
+
+.mirra-carousel__button {
+  display: grid;
+  place-items: center;
+  width: 4.8rem;
+  height: 4.8rem;
+  padding: 0;
+  border: 2px solid rgb(var(--color-foreground));
+  border-radius: 50%;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.mirra-carousel__button:hover:not([disabled]) {
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+
+.mirra-carousel__button[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.mirra-carousel__dots {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.mirra-carousel__dot {
+  position: relative;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.mirra-carousel__dot::before {
+  content: '';
+  position: absolute;
+  inset: 0.7rem;
+  border: 1.5px solid rgb(var(--color-foreground));
+  border-radius: 999px;
+  transition: inset 0.2s ease, background-color 0.2s ease;
+}
+
+.mirra-carousel__dot[aria-current='true']::before {
+  inset: 0.7rem 0;
+  background: rgb(var(--color-foreground));
+}
+
+@media screen and (min-width: 750px) {
+  .mirra-carousel__track {
+    grid-auto-columns: calc((100% - 2.4rem) / 2);
+    gap: 2.4rem;
+  }
+
+  .mirra-testimonial {
+    padding: 3.6rem 3.2rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .mirra-carousel__track {
+    grid-auto-columns: calc((100% - 6.4rem) / 3);
+    gap: 3.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mirra-carousel__track {
+    scroll-behavior: auto;
+  }
+
+  .mirra-carousel__button,
+  .mirra-carousel__dot::before {
+    transition: none;
+  }
+}

@@ -42,53 +42,43 @@ A cor de **destaque** é um campo novo dentro de cada esquema (`mirra_accent`), 
 
 ## Arquivos
 
-### Novos
+### Novos — seções (17)
 
-| Tipo | Arquivo | Função |
+| Seção | Nome no editor | Onde |
 |---|---|---|
-| Snippet | `mirra-theme-tokens.liquid` | Variáveis CSS extras por esquema (destaque), itálico do título, carrega CSS/JS globais |
-| Snippet | `mirra-icon.liquid` | Ícones SVG próprios (gota, folha, chama, presente, vela, casa, caminhão, mapa, cartão, troca, estrela, aspas, setas…) |
-| Snippet | `mirra-pill.liquid` | Selo em pílula com contorno fino |
-| Snippet | `mirra-framed-image.liquid` | Imagem emoldurada com `srcset`/lazy + placeholder |
-| Snippet | `mirra-wave.liquid` | SVG do divisor ondulado |
-| Snippet | `mirra-product-badges.liquid` | Novo / Mais vendido / Últimas unidades |
-| Snippet | `mirra-free-shipping-bar.liquid` | Barra de progresso de frete grátis |
-| Seção | `mirra-announcement-marquee` | Letreiro rolante |
-| Seção | `mirra-hero` | Hero editorial |
-| Seção | `mirra-benefits` | Faixa de benefícios |
-| Seção | `mirra-collection-cards` | 3 cards de coleção |
-| Seção | `mirra-featured-products` | Mais vendidos com compra rápida |
-| Seção | `mirra-founder` | Sobre a fundadora |
-| Seção | `mirra-ritual-steps` | Monte seu ritual |
-| Seção | `mirra-testimonials` | Depoimentos em carrossel |
-| Seção | `mirra-newsletter` | Newsletter com cupom |
-| Seção | `mirra-wave-divider` | Divisor ondulado entre seções |
-| Seção | `mirra-footer` | Rodapé completo |
-| Seção | `mirra-product-sticky-bar` | Barra de compra fixa (mobile) |
-| Seção | `mirra-page-hero` | Cabeçalho editorial de páginas (Sobre, FAQ, Contato) |
-| Seção | `mirra-rich-text` | Texto editorial com selos |
-| Seção | `mirra-faq` | FAQ em acordeão (+ dados estruturados FAQPage) |
-| Seção | `mirra-contact-info` | Canais de contato |
-| Seção | `mirra-404` | Página 404 personalizada |
-| Asset | `mirra-base.css` | Utilitários da marca (título, pílula, moldura, onda, botões mel) |
-| Asset | `mirra-skin.css` | Pele da marca sobre componentes do Dawn (header, cards, filtros, produto, gaveta) |
-| Asset | `mirra-*.css` / `mirra-*.js` | CSS/JS por seção, carregados só quando a seção existe |
-| Templates | `page.sobre.json`, `page.faq.json`, `page.contact.json`, `404.json`, `index.json`, `product.json`, `collection.json` | Conteúdo de exemplo |
-| Dados | `data/mirra-produtos.csv` | 12 produtos para importação |
+| `mirra-announcement-marquee` | MIRRA — Letreiro | Cabeçalho |
+| `mirra-hero` | MIRRA — Hero editorial | Home |
+| `mirra-benefits` | MIRRA — Benefícios | Home, coleção, Sobre |
+| `mirra-collection-cards` | MIRRA — Coleções | Home |
+| `mirra-featured-products` | MIRRA — Mais vendidos | Home, 404 |
+| `mirra-wave-divider` | MIRRA — Divisor ondulado | Entre seções |
+| `mirra-founder` | MIRRA — Fundadora | Home, Sobre |
+| `mirra-ritual-steps` | MIRRA — Monte seu ritual | Home |
+| `mirra-testimonials` | MIRRA — Depoimentos | Home |
+| `mirra-newsletter` | MIRRA — Newsletter | Home, Sobre |
+| `mirra-footer` | MIRRA — Rodapé | Rodapé |
+| `mirra-product-sticky-bar` | MIRRA — Compra fixa | Produto |
+| `mirra-page-hero` | MIRRA — Topo de página | Sobre, FAQ, Contato |
+| `mirra-rich-text` | MIRRA — Texto editorial | Sobre |
+| `mirra-faq` | MIRRA — Perguntas (FAQ) | FAQ |
+| `mirra-contact-info` | MIRRA — Canais de contato | Contato |
+| `mirra-404` | MIRRA — Página 404 | 404 |
 
-### Alterados (ganchos mínimos no core do Dawn)
+### Novos — snippets
 
-| Arquivo | Alteração |
-|---|---|
-| `layout/theme.liquid` | 1 linha: `{% render 'mirra-theme-tokens' %}` |
-| `config/settings_schema.json` | Campo `mirra_accent` no esquema de cor + grupo "MIRRA — Loja" (frete grátis, parcelas, estoque baixo) |
-| `config/settings_data.json` | Preset MIRRA (cores, fontes, botões, cartões, mídia, gaveta) |
-| `snippets/card-product.liquid` | 2 linhas: render de `mirra-product-badges` |
-| `snippets/cart-drawer.liquid` | 1 linha: render de `mirra-free-shipping-bar` |
-| `sections/main-cart-footer.liquid` | 1 linha: render de `mirra-free-shipping-bar` |
-| `sections/main-product.liquid` | Bloco novo `mirra_badges` (selos de benefícios) |
-| `sections/header-group.json`, `footer-group.json` | Usam as seções MIRRA |
-| `locales/pt-BR.json`, `locales/en.default.json` | Textos fixos da MIRRA (chave `mirra`) |
+`mirra-theme-tokens` (variáveis por esquema + itálico do título + CSS global) · `mirra-icon` (ícones próprios) · `mirra-pill` (selo em pílula) · `mirra-framed-image` (imagem emoldurada com srcset/lazy) · `mirra-wave` (SVG ondulado) · `mirra-product-badges` (Novo / Mais vendido / Últimas unidades) · `mirra-product-pills` (selos na página de produto) · `mirra-installments` (parcelamento) · `mirra-free-shipping-bar` (frete grátis) · `mirra-coupon` (cupom com copiar)
+
+### Novos — assets
+
+`mirra-base.css` (utilitários da marca) · `mirra-skin.css` (pele sobre o Dawn: tipografia, header, cards, filtros, produto, acordeões, gaveta) · CSS por seção (`mirra-hero.css`, `mirra-benefits.css`, …, `mirra-pages.css`, `mirra-product.css`) · JS: `mirra-marquee.js`, `mirra-carousel.js`, `mirra-product.js`, `mirra-copy.js`
+
+### Templates
+
+`index.json`, `product.json`, `collection.json`, `page.sobre.json`, `page.faq.json`, `page.contact.json`, `404.json`, `sections/header-group.json`, `sections/footer-group.json`
+
+### Alterados no core do Dawn (ganchos mínimos)
+
+Ver [ATUALIZANDO-O-DAWN.md](ATUALIZANDO-O-DAWN.md): `layout/theme.liquid` (1 linha), `snippets/card-product.liquid` (2), `snippets/cart-drawer.liquid` (1), `sections/main-cart-footer.liquid` (1), `sections/main-product.liquid` (2 blocos), `config/settings_schema.json`, `config/settings_data.json`, `locales/pt-BR.json` e `locales/en.default.json`.
 
 ## Etapas e commits
 

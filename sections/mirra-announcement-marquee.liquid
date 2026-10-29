@@ -1,0 +1,174 @@
+{{ 'mirra-announcement-marquee.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mirra-marquee.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign separator = section.settings.separator
+-%}
+
+{%- capture marquee_items -%}
+  {%- for block in section.blocks -%}
+    <li class="mirra-marquee__item" {{ block.shopify_attributes }}>
+      {%- if block.settings.icon != 'none' -%}
+        {%- render 'mirra-icon', icon: block.settings.icon, size: 18 -%}
+      {%- endif -%}
+      {%- if block.settings.link != blank -%}
+        <a href="{{ block.settings.link }}" class="mirra-marquee__link">{{ block.settings.text }}</a>
+      {%- else -%}
+        <span>{{ block.settings.text }}</span>
+      {%- endif -%}
+      {%- if separator != 'none' -%}
+        <span class="mirra-marquee__separator">{% render 'mirra-icon', icon: separator, size: 14 %}</span>
+      {%- endif -%}
+    </li>
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if section.blocks.size > 0 -%}
+  <mirra-marquee
+    class="mirra-marquee color-{{ section.settings.color_scheme }} gradient mirra-marquee--{{ section.settings.text_size }}{% if section.settings.direction == 'right' %} mirra-marquee--reverse{% endif %}"
+    style="--mirra-marquee-duration: {{ section.settings.speed }}s;"
+    role="region"
+    aria-label="{{ 'mirra.marquee.label' | t }}"
+  >
+    <div class="mirra-marquee__viewport">
+      <div class="mirra-marquee__track">
+        <ul class="mirra-marquee__group" role="list">
+          {{ marquee_items }}
+        </ul>
+        <ul class="mirra-marquee__group" aria-hidden="true" data-clone>
+          {{ marquee_items }}
+        </ul>
+      </div>
+    </div>
+    {%- if section.settings.show_pause_button -%}
+      <button
+        type="button"
+        class="mirra-marquee__toggle mirra-focus"
+        aria-label="{{ 'mirra.marquee.pause' | t }}"
+        data-label-pause="{{ 'mirra.marquee.pause' | t }}"
+        data-label-play="{{ 'mirra.marquee.play' | t }}"
+      >
+        <span class="mirra-marquee__icon-pause">{% render 'mirra-icon', icon: 'pausa', size: 14 %}</span>
+        <span class="mirra-marquee__icon-play">{% render 'mirra-icon', icon: 'play', size: 14 %}</span>
+      </button>
+    {%- endif -%}
+  </mirra-marquee>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "MIRRA — Letreiro",
+  "class": "mirra-marquee-section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Barra de anúncio com letreiro rolante. Pausa ao passar o mouse ou focar com o teclado e fica parada para quem ativou \"reduzir movimento\" no sistema."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cores",
+      "default": "scheme-3"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 80,
+      "step": 2,
+      "unit": "s",
+      "label": "Duração de uma volta",
+      "info": "Quanto maior, mais devagar.",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Direção",
+      "options": [
+        { "value": "left", "label": "Para a esquerda" },
+        { "value": "right", "label": "Para a direita" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "Tamanho do texto",
+      "options": [
+        { "value": "small", "label": "Pequeno" },
+        { "value": "medium", "label": "Médio" },
+        { "value": "large", "label": "Grande (editorial)" }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "select",
+      "id": "separator",
+      "label": "Separador entre avisos",
+      "options": [
+        { "value": "brilho", "label": "Brilho" },
+        { "value": "gota", "label": "Gota" },
+        { "value": "folha", "label": "Folha" },
+        { "value": "chama", "label": "Chama" },
+        { "value": "estrela", "label": "Estrela" },
+        { "value": "none", "label": "Nenhum" }
+      ],
+      "default": "brilho"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pause_button",
+      "label": "Mostrar botão pausar/retomar",
+      "info": "Recomendado para acessibilidade (WCAG 2.2.2).",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Aviso",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Frete grátis acima de R$ 199"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (opcional)"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Ícone",
+          "options": [
+            { "value": "none", "label": "Nenhum" },
+            { "value": "gota", "label": "Gota" },
+            { "value": "folha", "label": "Folha" },
+            { "value": "chama", "label": "Chama" },
+            { "value": "presente", "label": "Presente" },
+            { "value": "caminhao", "label": "Caminhão" },
+            { "value": "cartao", "label": "Cartão" },
+            { "value": "brilho", "label": "Brilho" }
+          ],
+          "default": "none"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MIRRA — Letreiro",
+      "blocks": [
+        { "type": "message", "settings": { "text": "Frete grátis acima de R$ 199", "icon": "caminhao" } },
+        { "type": "message", "settings": { "text": "Até 6x sem juros", "icon": "cartao" } },
+        { "type": "message", "settings": { "text": "Feito à mão, em pequenos lotes", "icon": "folha" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

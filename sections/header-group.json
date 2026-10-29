@@ -2,53 +2,58 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "show_line_separator": true,
-        "show_social": false,
-        "auto_rotate": false,
-        "change_slides_speed": 5,
-        "enable_country_selector": false,
-        "enable_language_selector": false
-      },
+    "mirra-marquee": {
+      "type": "mirra-announcement-marquee",
       "blocks": {
-        "announcement-bar-0": {
-          "type": "announcement",
-          "settings": {
-            "text": "Welcome to our store",
-            "text_alignment": "center",
-            "color_scheme": "scheme-1",
-            "link": ""
-          }
+        "msg-1": {
+          "type": "message",
+          "settings": { "text": "Frete grátis acima de R$ 199", "link": "", "icon": "caminhao" }
+        },
+        "msg-2": {
+          "type": "message",
+          "settings": { "text": "Entregamos para todo o Brasil", "link": "", "icon": "none" }
+        },
+        "msg-3": {
+          "type": "message",
+          "settings": { "text": "Até 6x sem juros", "link": "", "icon": "cartao" }
+        },
+        "msg-4": {
+          "type": "message",
+          "settings": { "text": "Cupom BEMVINDA10 na primeira compra", "link": "", "icon": "presente" }
+        },
+        "msg-5": {
+          "type": "message",
+          "settings": { "text": "Loja demonstrativa — marca fictícia", "link": "", "icon": "none" }
         }
       },
-      "block_order": [
-        "announcement-bar-0"
-      ]
+      "block_order": ["msg-1", "msg-2", "msg-3", "msg-4", "msg-5"],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "speed": 40,
+        "direction": "left",
+        "text_size": "small",
+        "separator": "brilho",
+        "show_pause_button": true
+      }
     },
     "header": {
       "type": "header",
       "settings": {
         "color_scheme": "scheme-1",
         "menu_color_scheme": "scheme-1",
-        "logo_position": "middle-left",
+        "logo_position": "middle-center",
         "menu": "main-menu",
         "menu_type_desktop": "dropdown",
         "sticky_header_type": "on-scroll-up",
-        "show_line_separator": true,
-        "enable_country_selector": true,
-        "enable_language_selector": true,
+        "show_line_separator": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
         "mobile_logo_position": "center",
         "margin_bottom": 0,
-        "padding_top": 20,
-        "padding_bottom": 20
+        "padding_top": 16,
+        "padding_bottom": 16
       }
     }
   },
-  "order": [
-    "announcement-bar",
-    "header"
-  ]
+  "order": ["mirra-marquee", "header"]
 }

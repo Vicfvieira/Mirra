@@ -563,7 +563,7 @@
       "label": "Progresso até o frete grátis"
     },
     "product": {
-      "installments_html": "ou <strong>{{ count }}x de {{ amount }}</strong> sem juros",
+      "installments_html": "ou <strong>{{ parcelas }}x de {{ amount }}</strong> sem juros",
       "sticky_add": "Adicionar",
       "sticky_label": "Compra rápida"
     },

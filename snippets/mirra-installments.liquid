@@ -1,0 +1,42 @@
+{% comment %}
+  MIRRA — "ou 6x de R$ X sem juros" (bloco "MIRRA — Parcelamento").
+  Atualiza ao trocar de variante via mirra-product.js.
+
+  Accepts:
+  - block: {Object} bloco mirra_installments
+  - product: {Object} produto
+  - section_id: {String} id da seção main-product
+
+  Usage:
+  {% render 'mirra-installments', block: block, product: product, section_id: section.id %}
+{% endcomment %}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign price = current_variant.price | default: product.price
+  assign min_installment = settings.mirra_installment_min | times: 100 | at_least: 1
+  assign count = settings.mirra_installments
+  assign max_by_min = price | divided_by: min_installment
+  if max_by_min < count
+    assign count = max_by_min
+  endif
+  if count < 1
+    assign count = 1
+  endif
+  assign installment = price | divided_by: count | money
+-%}
+
+{{ 'mirra-product.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mirra-product.js' | asset_url }}" defer="defer"></script>
+<p class="mirra-installments" id="MirraInstallments-{{ section_id }}" {{ block.shopify_attributes }}>
+  {%- render 'mirra-icon', icon: 'cartao', size: 18 -%}
+  <span>
+    {%- if count > 1 -%}
+      {{- 'mirra.product.installments_html' | t: parcelas: count, amount: installment -}}
+    {%- endif -%}
+    {%- if block.settings.pix_text != blank -%}
+      {%- if count > 1 %} · {% endif -%}
+      {{- block.settings.pix_text -}}
+    {%- endif -%}
+  </span>
+</p>

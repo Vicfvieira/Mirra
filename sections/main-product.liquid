@@ -688,6 +688,10 @@
                   </product-recommendations>
                 {%- when 'icon-with-text' -%}
                   {% render 'icon-with-text', block: block %}
+                {%- when 'mirra_badges' -%}
+                  {% render 'mirra-product-pills', block: block, product: product %}
+                {%- when 'mirra_installments' -%}
+                  {% render 'mirra-installments', block: block, product: product, section_id: section.id %}
               {%- endcase -%}
             {%- endfor -%}
             <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -2142,6 +2146,229 @@
           "default": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.default",
           "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.label",
           "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+        }
+      ]
+    },
+    {
+      "type": "mirra_badges",
+      "name": "MIRRA — Selos",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Selos em pílula com contorno fino. Para mostrar selos só em alguns produtos, use a opção de tag abaixo."
+        },
+        {
+          "type": "text",
+          "id": "text_1",
+          "label": "Selo 1 — texto",
+          "default": "100% vegano"
+        },
+        {
+          "type": "select",
+          "id": "icon_1",
+          "label": "Selo 1 — ícone",
+          "options": [
+            {
+              "value": "none",
+              "label": "Nenhum"
+            },
+            {
+              "value": "folha",
+              "label": "Folha"
+            },
+            {
+              "value": "gota",
+              "label": "Gota"
+            },
+            {
+              "value": "chama",
+              "label": "Chama"
+            },
+            {
+              "value": "coracao",
+              "label": "Coração"
+            },
+            {
+              "value": "brilho",
+              "label": "Brilho"
+            },
+            {
+              "value": "frasco",
+              "label": "Frasco"
+            },
+            {
+              "value": "caminhao",
+              "label": "Caminhão"
+            }
+          ],
+          "default": "folha"
+        },
+        {
+          "type": "text",
+          "id": "text_2",
+          "label": "Selo 2 — texto",
+          "default": "Feito à mão"
+        },
+        {
+          "type": "select",
+          "id": "icon_2",
+          "label": "Selo 2 — ícone",
+          "options": [
+            {
+              "value": "none",
+              "label": "Nenhum"
+            },
+            {
+              "value": "folha",
+              "label": "Folha"
+            },
+            {
+              "value": "gota",
+              "label": "Gota"
+            },
+            {
+              "value": "chama",
+              "label": "Chama"
+            },
+            {
+              "value": "coracao",
+              "label": "Coração"
+            },
+            {
+              "value": "brilho",
+              "label": "Brilho"
+            },
+            {
+              "value": "frasco",
+              "label": "Frasco"
+            },
+            {
+              "value": "caminhao",
+              "label": "Caminhão"
+            }
+          ],
+          "default": "coracao"
+        },
+        {
+          "type": "text",
+          "id": "text_3",
+          "label": "Selo 3 — texto",
+          "default": "Sem parabenos"
+        },
+        {
+          "type": "select",
+          "id": "icon_3",
+          "label": "Selo 3 — ícone",
+          "options": [
+            {
+              "value": "none",
+              "label": "Nenhum"
+            },
+            {
+              "value": "folha",
+              "label": "Folha"
+            },
+            {
+              "value": "gota",
+              "label": "Gota"
+            },
+            {
+              "value": "chama",
+              "label": "Chama"
+            },
+            {
+              "value": "coracao",
+              "label": "Coração"
+            },
+            {
+              "value": "brilho",
+              "label": "Brilho"
+            },
+            {
+              "value": "frasco",
+              "label": "Frasco"
+            },
+            {
+              "value": "caminhao",
+              "label": "Caminhão"
+            }
+          ],
+          "default": "gota"
+        },
+        {
+          "type": "text",
+          "id": "text_4",
+          "label": "Selo 4 — texto"
+        },
+        {
+          "type": "select",
+          "id": "icon_4",
+          "label": "Selo 4 — ícone",
+          "options": [
+            {
+              "value": "none",
+              "label": "Nenhum"
+            },
+            {
+              "value": "folha",
+              "label": "Folha"
+            },
+            {
+              "value": "gota",
+              "label": "Gota"
+            },
+            {
+              "value": "chama",
+              "label": "Chama"
+            },
+            {
+              "value": "coracao",
+              "label": "Coração"
+            },
+            {
+              "value": "brilho",
+              "label": "Brilho"
+            },
+            {
+              "value": "frasco",
+              "label": "Frasco"
+            },
+            {
+              "value": "caminhao",
+              "label": "Caminhão"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "text",
+          "id": "only_tag",
+          "label": "Mostrar só em produtos com a tag (opcional)",
+          "info": "Ex.: vegano. Deixe vazio para mostrar em todos."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_status_badges",
+          "label": "Incluir selos Novo / Mais vendido / Últimas unidades",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "mirra_installments",
+      "name": "MIRRA — Parcelamento",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Número de parcelas e valor mínimo em Configurações do tema › MIRRA — Loja."
+        },
+        {
+          "type": "text",
+          "id": "pix_text",
+          "label": "Texto extra (opcional)",
+          "default": "5% off no Pix"
         }
       ]
     }

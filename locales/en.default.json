@@ -551,7 +551,7 @@
       "label": "Progress to free shipping"
     },
     "product": {
-      "installments_html": "or <strong>{{ count }}x of {{ amount }}</strong> interest-free",
+      "installments_html": "or <strong>{{ parcelas }}x of {{ amount }}</strong> interest-free",
       "sticky_add": "Add",
       "sticky_label": "Quick buy"
     },

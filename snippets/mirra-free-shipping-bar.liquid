@@ -1,0 +1,43 @@
+{% comment %}
+  MIRRA — barra de progresso até o frete grátis.
+  Fica dentro da gaveta/página do carrinho, então é re-renderizada pelo Dawn a cada alteração.
+  Valor mínimo em Configurações do tema › MIRRA — Loja (em reais, moeda da loja).
+
+  Usage:
+  {% render 'mirra-free-shipping-bar' %}
+{% endcomment %}
+
+{%- if settings.mirra_free_shipping_enabled and settings.mirra_free_shipping_threshold > 0 -%}
+  {%- liquid
+    assign threshold = settings.mirra_free_shipping_threshold | times: 100
+    assign total = cart.total_price
+    assign remaining = threshold | minus: total
+    assign remaining_money = remaining | money
+    assign percent = total | times: 100 | divided_by: threshold
+    if percent > 100
+      assign percent = 100
+    endif
+  -%}
+  <div class="mirra-shipping{% if remaining <= 0 %} mirra-shipping--done{% endif %}">
+    <p class="mirra-shipping__text">
+      {%- render 'mirra-icon', icon: 'caminhao', size: 20 -%}
+      <span>
+        {%- if remaining > 0 -%}
+          {{ 'mirra.shipping.remaining_html' | t: amount: remaining_money }}
+        {%- else -%}
+          {{ 'mirra.shipping.unlocked' | t }}
+        {%- endif -%}
+      </span>
+    </p>
+    <div
+      class="mirra-shipping__track"
+      role="progressbar"
+      aria-label="{{ 'mirra.shipping.label' | t }}"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="{{ percent }}"
+    >
+      <span class="mirra-shipping__fill" style="width: {{ percent }}%;"></span>
+    </div>
+  </div>
+{%- endif -%}

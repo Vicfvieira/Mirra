@@ -1,0 +1,185 @@
+{{ 'mirra-ritual-steps.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="ritual"
+  class="mirra-section mirra-ritual color-{{ section.settings.color_scheme }} gradient"
+  style="--mirra-pt: {{ section.settings.padding_top }}px; --mirra-pb: {{ section.settings.padding_bottom }}px;"
+  aria-labelledby="MirraRitualTitle-{{ section.id }}"
+>
+  <div class="page-width">
+    <div class="mirra-section__header mirra-section__header--center">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="mirra-eyebrow">
+          {%- render 'mirra-icon', icon: 'lua', size: 18 -%}
+          {{ section.settings.eyebrow }}
+        </p>
+      {%- endif -%}
+      <h2 id="MirraRitualTitle-{{ section.id }}" class="mirra-title mirra-title--lg">
+        {{- section.settings.heading -}}
+      </h2>
+      {%- if section.settings.text != blank -%}
+        <div class="mirra-lead mirra-richtext">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    <ol class="mirra-ritual__steps" role="list">
+      {%- for block in section.blocks -%}
+        <li class="mirra-ritual__step" {{ block.shopify_attributes }}>
+          <div class="mirra-ritual__marker">
+            <span class="mirra-ritual__number" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+            <span class="mirra-ritual__icon">{% render 'mirra-icon', icon: block.settings.icon, size: 32 %}</span>
+          </div>
+          <h3 class="mirra-ritual__title">
+            <span class="mirra-visually-hidden">{{ 'mirra.general.step' | t: number: forloop.index }}: </span>
+            {{- block.settings.title -}}
+          </h3>
+          {%- if block.settings.text != blank -%}
+            <div class="mirra-ritual__text mirra-richtext">{{ block.settings.text }}</div>
+          {%- endif -%}
+          {%- if block.settings.link_label != blank and block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}" class="mirra-link-arrow">
+              {{- block.settings.link_label | escape -}}
+              {%- render 'mirra-icon', icon: 'seta', size: 18 -%}
+            </a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ol>
+
+    {%- if section.settings.button_label != blank -%}
+      <div class="mirra-ritual__cta">
+        <a
+          {% if section.settings.button_link != blank %}
+            href="{{ section.settings.button_link }}"
+          {% else %}
+            role="link" aria-disabled="true"
+          {% endif %}
+          class="button mirra-button--accent"
+        >
+          {{- section.settings.button_label | escape -}}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MIRRA — Monte seu ritual",
+  "tag": "div",
+  "class": "mirra-ritual-section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Chamada acima do título",
+      "default": "Em 3 passos"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "default": "Monte seu <em>ritual</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Não precisa de banheira nem de uma hora livre. Só de intenção.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto do botão",
+      "default": "Quero meu kit"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link do botão"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cores",
+      "default": "scheme-3"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço superior",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço inferior",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Passo",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Ícone",
+          "options": [
+            { "value": "chama", "label": "Chama" },
+            { "value": "gota", "label": "Gota" },
+            { "value": "folha", "label": "Folha" },
+            { "value": "vela", "label": "Vela" },
+            { "value": "frasco", "label": "Frasco" },
+            { "value": "lua", "label": "Lua" },
+            { "value": "brilho", "label": "Brilho" }
+          ],
+          "default": "chama"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Acenda"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto",
+          "default": "<p>Escolha uma vela e deixe o aroma preparar o ambiente.</p>"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Texto do link (opcional)"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (opcional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MIRRA — Monte seu ritual",
+      "blocks": [
+        { "type": "step", "settings": { "icon": "chama", "title": "Acenda", "text": "<p>Escolha uma vela e deixe o aroma preparar o ambiente.</p>" } },
+        { "type": "step", "settings": { "icon": "gota", "title": "Massageie", "text": "<p>Aqueça algumas gotas de óleo nas mãos e espalhe sem pressa.</p>" } },
+        { "type": "step", "settings": { "icon": "folha", "title": "Respire", "text": "<p>Finalize com a bruma de travesseiro e três respirações profundas.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

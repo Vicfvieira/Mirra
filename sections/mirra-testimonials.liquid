@@ -1,0 +1,224 @@
+{{ 'mirra-testimonials.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mirra-carousel.js' | asset_url }}" defer="defer"></script>
+
+{%- assign slide_count = section.blocks.size -%}
+
+<section
+  class="mirra-section mirra-testimonials color-{{ section.settings.color_scheme }} gradient"
+  style="--mirra-pt: {{ section.settings.padding_top }}px; --mirra-pb: {{ section.settings.padding_bottom }}px;"
+  aria-labelledby="MirraTestimonialsTitle-{{ section.id }}"
+>
+  <div class="page-width">
+    <div class="mirra-section__header mirra-section__header--split">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="mirra-eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 id="MirraTestimonialsTitle-{{ section.id }}" class="mirra-title mirra-title--lg">
+          {{- section.settings.heading -}}
+        </h2>
+        {%- if section.settings.disclaimer != blank -%}
+          <p class="mirra-testimonials__disclaimer">
+            {%- render 'mirra-pill', text: section.settings.disclaimer, icon: 'brilho' -%}
+          </p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if slide_count > 0 -%}
+      <mirra-carousel
+        class="mirra-carousel"
+        role="region"
+        aria-roledescription="carousel"
+        aria-labelledby="MirraTestimonialsTitle-{{ section.id }}"
+      >
+        <ul class="mirra-carousel__track" role="list" tabindex="0" aria-live="polite">
+          {%- for block in section.blocks -%}
+            <li
+              class="mirra-carousel__slide"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="{{ 'mirra.carousel.slide' | t: index: forloop.index, count: slide_count }}"
+              {{ block.shopify_attributes }}
+            >
+              <figure class="mirra-testimonial color-{{ block.settings.color_scheme }} gradient">
+                <div class="mirra-testimonial__top">
+                  {%- render 'mirra-icon', icon: 'aspas', size: 40, class: 'mirra-testimonial__quote-icon' -%}
+                  {%- if block.settings.rating > 0 -%}
+                    <span class="mirra-testimonial__rating" role="img" aria-label="{{ 'mirra.testimonials.rating' | t: rating: block.settings.rating }}">
+                      {%- for i in (1..block.settings.rating) -%}
+                        {%- render 'mirra-icon', icon: 'estrela', size: 18 -%}
+                      {%- endfor -%}
+                    </span>
+                  {%- endif -%}
+                </div>
+                <blockquote class="mirra-testimonial__quote">
+                  <p>{{ block.settings.quote }}</p>
+                </blockquote>
+                <figcaption class="mirra-testimonial__author">
+                  {%- if block.settings.avatar != blank -%}
+                    {{
+                      block.settings.avatar
+                      | image_url: width: 160
+                      | image_tag:
+                        widths: '80, 160',
+                        sizes: '56px',
+                        loading: 'lazy',
+                        alt: '',
+                        class: 'mirra-testimonial__avatar'
+                    }}
+                  {%- else -%}
+                    <span class="mirra-testimonial__avatar mirra-testimonial__avatar--initial" aria-hidden="true">
+                      {{- block.settings.name | slice: 0 -}}
+                    </span>
+                  {%- endif -%}
+                  <span>
+                    <strong>{{ block.settings.name }}</strong>
+                    {%- if block.settings.detail != blank -%}
+                      <span class="mirra-testimonial__detail">{{ block.settings.detail }}</span>
+                    {%- endif -%}
+                  </span>
+                </figcaption>
+              </figure>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        <div class="mirra-carousel__controls">
+          <button type="button" class="mirra-carousel__button mirra-focus" data-carousel-prev aria-label="{{ 'mirra.carousel.previous' | t }}">
+            {%- render 'mirra-icon', icon: 'seta-esquerda', size: 22 -%}
+          </button>
+          <div class="mirra-carousel__dots" role="group" aria-label="{{ section.settings.heading | strip_html | escape }}">
+            {%- for block in section.blocks -%}
+              <button
+                type="button"
+                class="mirra-carousel__dot mirra-focus"
+                data-carousel-dot="{{ forloop.index0 }}"
+                aria-label="{{ 'mirra.carousel.go_to' | t: index: forloop.index }}"
+                {% if forloop.first %}
+                  aria-current="true"
+                {% endif %}
+              ></button>
+            {%- endfor -%}
+          </div>
+          <button type="button" class="mirra-carousel__button mirra-focus" data-carousel-next aria-label="{{ 'mirra.carousel.next' | t }}">
+            {%- render 'mirra-icon', icon: 'seta-direita', size: 22 -%}
+          </button>
+        </div>
+      </mirra-carousel>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MIRRA — Depoimentos",
+  "tag": "div",
+  "class": "mirra-testimonials-section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Chamada acima do título",
+      "default": "Quem usa, conta"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "default": "Pequenos rituais, <em>grandes</em> histórias"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Aviso",
+      "info": "Mantenha visível enquanto os depoimentos forem de exemplo.",
+      "default": "Depoimentos fictícios — conteúdo de exemplo"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cores",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço superior",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço inferior",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Depoimento",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Depoimento",
+          "default": "O óleo de lavanda virou meu momento favorito do dia."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nome",
+          "default": "Cliente fictícia"
+        },
+        {
+          "type": "text",
+          "id": "detail",
+          "label": "Detalhe (cidade, produto…)",
+          "default": "São Paulo, SP"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "label": "Estrelas",
+          "default": 5
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Foto (opcional)",
+          "info": "Recomendado: 160 × 160 px (1:1)."
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "Esquema de cores do card",
+          "default": "scheme-2"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MIRRA — Depoimentos",
+      "blocks": [
+        { "type": "testimonial" },
+        { "type": "testimonial" },
+        { "type": "testimonial" }
+      ]
+    }
+  ]
+}
+{% endschema %}

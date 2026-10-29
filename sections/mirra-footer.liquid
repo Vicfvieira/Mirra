@@ -1,0 +1,300 @@
+{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+{{ 'mirra-footer.css' | asset_url | stylesheet_tag }}
+
+<footer class="mirra-footer color-{{ section.settings.color_scheme }} gradient">
+  {%- if section.settings.show_wave -%}
+    <div class="mirra-footer__wave" aria-hidden="true">
+      {%- render 'mirra-wave', shape: 'suave', flip: true -%}
+    </div>
+  {%- endif -%}
+
+  <div class="page-width">
+    {%- if section.settings.headline != blank -%}
+      <p class="mirra-title mirra-title--lg mirra-footer__headline">{{ section.settings.headline }}</p>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="mirra-footer__blocks mirra-footer__blocks--{{ section.blocks.size }}">
+        {%- for block in section.blocks -%}
+          <div class="mirra-footer__block mirra-footer__block--{{ block.type }}" {{ block.shopify_attributes }}>
+            {%- case block.type -%}
+              {%- when 'brand' -%}
+                {%- if block.settings.logo != blank -%}
+                  {%- assign logo_height = block.settings.logo_width | divided_by: block.settings.logo.aspect_ratio -%}
+                  {{
+                    block.settings.logo
+                    | image_url: width: 600
+                    | image_tag:
+                      widths: '150, 300, 450, 600',
+                      sizes: '200px',
+                      loading: 'lazy',
+                      width: block.settings.logo_width,
+                      height: logo_height,
+                      alt: shop.name,
+                      class: 'mirra-footer__logo'
+                  }}
+                {%- else -%}
+                  <p class="mirra-footer__wordmark">{{ shop.name | escape }}</p>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <div class="mirra-footer__text mirra-richtext">{{ block.settings.text }}</div>
+                {%- endif -%}
+                {%- if block.settings.show_social -%}
+                  <div class="mirra-footer__social">
+                    <span class="mirra-visually-hidden">{{ 'mirra.footer.social' | t }}</span>
+                    {%- render 'social-icons', class: 'mirra-footer__social-list' -%}
+                  </div>
+                {%- endif -%}
+
+              {%- when 'menu' -%}
+                {%- if block.settings.heading != blank -%}
+                  <h2 class="mirra-footer__heading">{{ block.settings.heading }}</h2>
+                {%- endif -%}
+                {%- if block.settings.menu != blank and block.settings.menu.links.size > 0 -%}
+                  <ul class="mirra-footer__menu" role="list">
+                    {%- for link in block.settings.menu.links -%}
+                      <li>
+                        <a
+                          href="{{ link.url }}"
+                          class="mirra-footer__link"
+                          {% if link.current %}
+                            aria-current="page"
+                          {% endif %}
+                        >
+                          {{- link.title | escape -}}
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+
+              {%- when 'text' -%}
+                {%- if block.settings.heading != blank -%}
+                  <h2 class="mirra-footer__heading">{{ block.settings.heading }}</h2>
+                {%- endif -%}
+                <div class="mirra-footer__text mirra-richtext">{{ block.settings.text }}</div>
+            {%- endcase -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="mirra-footer__payments">
+      {%- if section.settings.payment_enable and shop.enabled_payment_types.size > 0 -%}
+        <h2 class="mirra-footer__heading mirra-footer__heading--small">{{ 'mirra.footer.payment' | t }}</h2>
+        <ul class="list list-payment mirra-footer__payment-list" role="list">
+          {%- for type in shop.enabled_payment_types -%}
+            <li class="list-payment__item">
+              {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- if section.settings.payment_note != blank -%}
+        <p class="mirra-footer__payment-note">{{ section.settings.payment_note }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="mirra-footer__bottom">
+      <div class="mirra-footer__legal">
+        <small>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | escape }}</small>
+        {%- if section.settings.show_policy -%}
+          <ul class="mirra-footer__policies" role="list">
+            {%- for policy in shop.policies -%}
+              {%- if policy != blank -%}
+                <li>
+                  <small><a href="{{ policy.url }}" class="mirra-footer__link">{{ policy.title | escape }}</a></small>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+
+      <div class="mirra-footer__credits">
+        {%- if section.settings.demo_text != blank -%}
+          {%- render 'mirra-pill', text: section.settings.demo_text, icon: 'brilho', style: 'accent', class: 'mirra-footer__demo' -%}
+        {%- endif -%}
+        {%- if section.settings.credit_name != blank -%}
+          <p class="mirra-footer__credit">
+            {{ section.settings.credit_label }}
+            {% if section.settings.credit_url != blank -%}
+              <a href="{{ section.settings.credit_url }}" target="_blank" rel="noopener">
+                {{- section.settings.credit_name -}}
+                <span class="mirra-visually-hidden"> ({{ 'mirra.footer.new_window' | t }})</span>
+              </a>
+            {%- else -%}
+              <strong>{{ section.settings.credit_name }}</strong>
+            {%- endif %}
+          </p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "MIRRA — Rodapé",
+  "class": "mirra-footer-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cores",
+      "default": "scheme-5"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wave",
+      "label": "Onda no topo do rodapé",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "headline",
+      "label": "Frase de destaque",
+      "default": "Rituais pequenos, <em>efeitos</em> grandes."
+    },
+    {
+      "type": "header",
+      "content": "Pagamento e políticas"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_enable",
+      "label": "Mostrar ícones de pagamento",
+      "info": "Os ícones seguem os métodos ativos em Configurações › Pagamentos.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "payment_note",
+      "label": "Nota de pagamento",
+      "default": "Pix com 5% de desconto • Boleto • Cartão em até 6x sem juros"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policy",
+      "label": "Mostrar links das políticas",
+      "info": "Crie as políticas em Configurações › Políticas.",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Selo e crédito"
+    },
+    {
+      "type": "text",
+      "id": "demo_text",
+      "label": "Selo de loja demonstrativa",
+      "default": "Loja demonstrativa — marca fictícia"
+    },
+    {
+      "type": "text",
+      "id": "credit_label",
+      "label": "Texto antes do nome",
+      "default": "Desenvolvido por"
+    },
+    {
+      "type": "text",
+      "id": "credit_name",
+      "label": "Nome",
+      "default": "Victoria Fernandes"
+    },
+    {
+      "type": "url",
+      "id": "credit_url",
+      "label": "Link do crédito",
+      "default": "https://portifolio-vicszf.vercel.app"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Marca",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo (opcional)",
+          "info": "Se vazio, mostra o nome da loja em letreiro."
+        },
+        {
+          "type": "range",
+          "id": "logo_width",
+          "min": 80,
+          "max": 300,
+          "step": 10,
+          "unit": "px",
+          "label": "Largura do logo",
+          "default": 160
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto",
+          "default": "<p>Autocuidado & rituais naturais. Óleos, velas e cosméticos feitos à mão em pequenos lotes.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social",
+          "label": "Mostrar redes sociais",
+          "info": "Configure os links em Configurações do tema › Redes sociais.",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Título",
+          "default": "Loja"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "footer"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Texto",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Título",
+          "default": "Atendimento"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto",
+          "default": "<p>Seg. a sex., 9h às 18h<br>contato@mirra.exemplo</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MIRRA — Rodapé",
+      "blocks": [
+        { "type": "brand" },
+        { "type": "menu", "settings": { "heading": "Loja", "menu": "main-menu" } },
+        { "type": "menu", "settings": { "heading": "Ajuda", "menu": "footer" } },
+        { "type": "text" }
+      ]
+    }
+  ]
+}
+{% endschema %}

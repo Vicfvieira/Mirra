@@ -1,0 +1,197 @@
+{{ 'mirra-founder.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="mirra-section mirra-founder color-{{ section.settings.color_scheme }} gradient mirra-founder--image-{{ section.settings.image_position }}"
+  style="--mirra-pt: {{ section.settings.padding_top }}px; --mirra-pb: {{ section.settings.padding_bottom }}px;"
+  aria-labelledby="MirraFounderTitle-{{ section.id }}"
+>
+  <div class="page-width mirra-founder__grid">
+    <div class="mirra-founder__media">
+      {%- render 'mirra-framed-image',
+        image: section.settings.image,
+        ratio: 'portrait',
+        sizes: '(min-width: 990px) 40vw, 88vw',
+        placeholder: 'lifestyle-1',
+        tilt: true,
+        class: 'mirra-founder__frame'
+      -%}
+      {%- if section.settings.photo_caption != blank -%}
+        {%- render 'mirra-pill', text: section.settings.photo_caption, icon: 'coracao', style: 'accent', class: 'mirra-founder__caption' -%}
+      {%- endif -%}
+    </div>
+
+    <div class="mirra-founder__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="mirra-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 id="MirraFounderTitle-{{ section.id }}" class="mirra-title mirra-title--lg">
+        {{- section.settings.heading -}}
+      </h2>
+
+      {%- if section.settings.quote != blank -%}
+        <blockquote class="mirra-founder__quote">
+          {%- render 'mirra-icon', icon: 'aspas', size: 36, class: 'mirra-founder__quote-icon' -%}
+          <p>{{ section.settings.quote }}</p>
+        </blockquote>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <div class="mirra-lead mirra-richtext">{{ section.settings.text }}</div>
+      {%- endif -%}
+
+      <div class="mirra-founder__signature">
+        {%- if section.settings.signature != blank -%}
+          {{
+            section.settings.signature
+            | image_url: width: 600
+            | image_tag:
+              widths: '200, 300, 400, 600',
+              sizes: '240px',
+              loading: 'lazy',
+              alt: section.settings.name,
+              class: 'mirra-founder__signature-img'
+          }}
+        {%- elsif section.settings.name != blank -%}
+          <span class="mirra-founder__signature-text" aria-hidden="true">{{ section.settings.name }}</span>
+        {%- endif -%}
+        {%- if section.settings.name != blank -%}
+          <p class="mirra-founder__name">
+            <strong>{{ section.settings.name }}</strong>
+            {%- if section.settings.role != blank -%}
+              <span>{{ section.settings.role }}</span>
+            {%- endif -%}
+          </p>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.button_label != blank -%}
+        <a
+          {% if section.settings.button_link != blank %}
+            href="{{ section.settings.button_link }}"
+          {% else %}
+            role="link" aria-disabled="true"
+          {% endif %}
+          class="button button--secondary"
+        >
+          {{- section.settings.button_label | escape -}}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MIRRA — Fundadora",
+  "tag": "div",
+  "class": "mirra-founder-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Foto",
+      "info": "Recomendado: 1200 × 1500 px (4:5)."
+    },
+    {
+      "type": "text",
+      "id": "photo_caption",
+      "label": "Selo sobre a foto",
+      "default": "Desde a primeira vela"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Posição da foto no desktop",
+      "options": [
+        { "value": "left", "label": "Esquerda" },
+        { "value": "right", "label": "Direita" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Chamada acima do título",
+      "default": "Sobre a fundadora"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "default": "Tudo começou numa <em>cozinha</em> com cheiro de alecrim."
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Citação em destaque",
+      "default": "Eu queria produtos que fizessem a gente parar. Nem que fosse por cinco minutos."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>A MIRRA nasceu de um caderno de receitas e de muita tentativa e erro. Cada óleo e cada vela ainda é testado em pequenos lotes antes de chegar até você — com ingredientes de origem vegetal e embalagens recicláveis.</p><p><em>A MIRRA é uma marca fictícia criada para demonstração.</em></p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "signature",
+      "label": "Assinatura manuscrita (imagem)",
+      "info": "PNG com fundo transparente, 600 × 200 px (3:1). Se vazio, o nome é mostrado em itálico."
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Nome",
+      "default": "Marina Rocha"
+    },
+    {
+      "type": "text",
+      "id": "role",
+      "label": "Cargo",
+      "default": "Fundadora & perfumista (personagem fictícia)"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto do botão",
+      "default": "Conheça nossa história"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link do botão"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cores",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço superior",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço inferior",
+      "default": 96
+    }
+  ],
+  "presets": [
+    {
+      "name": "MIRRA — Fundadora"
+    }
+  ]
+}
+{% endschema %}

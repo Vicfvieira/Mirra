@@ -394,3 +394,22 @@ body {
     transition: none;
   }
 }
+
+/* ---------- Selos MIRRA nos cards ---------- */
+.mirra-badge--new {
+  background: rgb(var(--mirra-highlight));
+  color: rgb(var(--mirra-highlight-label));
+  border-color: rgb(var(--mirra-highlight-label));
+}
+
+.mirra-badge--best {
+  background: rgb(var(--color-button));
+  color: rgb(var(--color-button-text));
+  border-color: rgb(var(--color-button-text));
+}
+
+.mirra-badge--low {
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  border-style: dashed;
+}

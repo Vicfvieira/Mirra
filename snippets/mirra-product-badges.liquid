@@ -1,0 +1,52 @@
+{% comment %}
+  MIRRA — selos de produto: Novo / Mais vendido / Últimas unidades.
+  - Novo e Mais vendido: pelas tags definidas em Configurações do tema › MIRRA — Loja
+  - Últimas unidades: estoque rastreado > 0 e até o limite configurado
+
+  Accepts:
+  - product: {Object} produto
+  - max: {Number} máximo de selos (padrão 2). Prioridade: Novo, Mais vendido, Últimas unidades.
+
+  Usage:
+  {% render 'mirra-product-badges', product: card_product %}
+{% endcomment %}
+
+{%- liquid
+  assign max_badges = max | default: 2
+  assign shown = 0
+  assign tag_new = settings.mirra_tag_new | default: 'novo' | downcase
+  assign tag_best = settings.mirra_tag_bestseller | default: 'mais-vendido' | downcase
+  assign product_tags = product.tags | join: '|' | downcase | split: '|'
+
+  assign low_stock = false
+  if product.available
+    assign tracked_qty = 0
+    assign tracked = false
+    for variant in product.variants
+      if variant.inventory_management == 'shopify' and variant.inventory_policy == 'deny'
+        assign tracked = true
+        if variant.inventory_quantity > 0
+          assign tracked_qty = tracked_qty | plus: variant.inventory_quantity
+        endif
+      else
+        assign tracked = false
+        break
+      endif
+    endfor
+    if tracked and tracked_qty > 0 and tracked_qty <= settings.mirra_low_stock_threshold
+      assign low_stock = true
+    endif
+  endif
+-%}
+
+{%- if product_tags contains tag_new and shown < max_badges -%}
+  <span class="badge mirra-badge mirra-badge--new">{{ 'mirra.badges.new' | t }}</span>
+  {%- assign shown = shown | plus: 1 -%}
+{%- endif -%}
+{%- if product_tags contains tag_best and shown < max_badges -%}
+  <span class="badge mirra-badge mirra-badge--best">{{ 'mirra.badges.bestseller' | t }}</span>
+  {%- assign shown = shown | plus: 1 -%}
+{%- endif -%}
+{%- if low_stock and shown < max_badges -%}
+  <span class="badge mirra-badge mirra-badge--low">{{ 'mirra.badges.low_stock' | t }}</span>
+{%- endif -%}

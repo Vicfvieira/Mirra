@@ -1,0 +1,378 @@
+{{ 'mirra-hero.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign heading_tag = 'h2'
+  if section.index == 1 or section.settings.use_h1
+    assign heading_tag = 'h1'
+  endif
+  assign lazy_image = true
+  if section.index <= 2
+    assign lazy_image = false
+  endif
+-%}
+
+<section
+  class="mirra-section mirra-hero color-{{ section.settings.color_scheme }} gradient mirra-hero--image-{{ section.settings.image_position }}"
+  style="--mirra-pt: {{ section.settings.padding_top }}px; --mirra-pb: {{ section.settings.padding_bottom }}px;"
+  aria-labelledby="MirraHeroTitle-{{ section.id }}"
+>
+  <div class="page-width mirra-hero__grid">
+    <div class="mirra-hero__intro">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="mirra-eyebrow">
+          {%- render 'mirra-icon', icon: section.settings.eyebrow_icon, size: 18 -%}
+          {{ section.settings.eyebrow }}
+        </p>
+      {%- endif -%}
+      <{{ heading_tag }}
+        id="MirraHeroTitle-{{ section.id }}"
+        class="mirra-title mirra-title--{{ section.settings.heading_size }} mirra-hero__title"
+      >
+        {{- section.settings.heading -}}
+      </{{ heading_tag }}>
+    </div>
+
+    <div class="mirra-hero__media">
+      {%- render 'mirra-framed-image',
+        image: section.settings.image,
+        ratio: section.settings.image_ratio,
+        sizes: '(min-width: 990px) 45vw, (min-width: 750px) 70vw, 88vw',
+        lazy: lazy_image,
+        placeholder: 'lifestyle-2',
+        tilt: section.settings.tilt_image,
+        class: 'mirra-hero__frame'
+      -%}
+
+      {%- if section.settings.image_secondary != blank -%}
+        {%- render 'mirra-framed-image',
+          image: section.settings.image_secondary,
+          ratio: 'square',
+          sizes: '(min-width: 990px) 16vw, 30vw',
+          class: 'mirra-hero__frame-secondary'
+        -%}
+      {%- endif -%}
+
+      {%- if section.settings.badge_text != blank -%}
+        {%- render 'mirra-pill',
+          text: section.settings.badge_text,
+          icon: section.settings.badge_icon,
+          style: section.settings.badge_style,
+          class: 'mirra-hero__badge'
+        -%}
+      {%- endif -%}
+
+      {%- if section.settings.stamp_text != blank -%}
+        <div class="mirra-hero__stamp" aria-hidden="true">
+          <svg viewBox="0 0 200 200" class="mirra-hero__stamp-ring">
+            <defs>
+              <path id="MirraStampPath-{{ section.id }}" d="M100 100m-72 0a72 72 0 1 1 144 0a72 72 0 1 1-144 0"/>
+            </defs>
+            <text>
+              <textPath href="#MirraStampPath-{{ section.id }}" textLength="448" lengthAdjust="spacing">{{ section.settings.stamp_text | escape }}</textPath>
+            </text>
+          </svg>
+          <span class="mirra-hero__stamp-icon">{% render 'mirra-icon', icon: section.settings.stamp_icon, size: 40 %}</span>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="mirra-hero__content">
+      {%- if section.settings.text != blank -%}
+        <div class="mirra-lead mirra-richtext">{{ section.settings.text }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.button_label_1 != blank or section.settings.button_label_2 != blank -%}
+        <div class="mirra-buttons">
+          {%- if section.settings.button_label_1 != blank -%}
+            <a
+              {% if section.settings.button_link_1 != blank %}
+                href="{{ section.settings.button_link_1 }}"
+              {% else %}
+                role="link" aria-disabled="true"
+              {% endif %}
+              class="button button--primary"
+            >
+              {{- section.settings.button_label_1 | escape -}}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.button_label_2 != blank -%}
+            <a
+              {% if section.settings.button_link_2 != blank %}
+                href="{{ section.settings.button_link_2 }}"
+              {% else %}
+                role="link" aria-disabled="true"
+              {% endif %}
+              class="button mirra-button--accent"
+            >
+              {{- section.settings.button_label_2 | escape -}}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <ul class="mirra-pill-list mirra-hero__pills" role="list">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>
+              {%- render 'mirra-pill', text: block.settings.text, icon: block.settings.icon -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MIRRA — Hero editorial",
+  "tag": "div",
+  "class": "mirra-hero-section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Texto"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Chamada acima do título",
+      "default": "Autocuidado & rituais naturais"
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_icon",
+      "label": "Ícone da chamada",
+      "options": [
+        { "value": "none", "label": "Nenhum" },
+        { "value": "gota", "label": "Gota" },
+        { "value": "folha", "label": "Folha" },
+        { "value": "chama", "label": "Chama" },
+        { "value": "brilho", "label": "Brilho" }
+      ],
+      "default": "brilho"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "info": "Coloque em itálico a palavra que deve aparecer em destaque (cor mel).",
+      "default": "Rituais pequenos, <em>efeitos</em> grandes."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Tamanho do título",
+      "options": [
+        { "value": "lg", "label": "Grande" },
+        { "value": "xl", "label": "Gigante" }
+      ],
+      "default": "xl"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_h1",
+      "label": "Usar como título principal da página (H1)",
+      "info": "Ativado automaticamente quando é a primeira seção.",
+      "default": false
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto de apoio",
+      "default": "<p>Óleos, velas e cosméticos naturais feitos à mão em pequenos lotes — para transformar cinco minutos do seu dia em um ritual.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Botões"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "Botão principal — texto",
+      "default": "Comprar agora"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Botão principal — link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Botão mel — texto",
+      "default": "Monte seu ritual"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Botão mel — link"
+    },
+    {
+      "type": "header",
+      "content": "Imagem"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagem principal",
+      "info": "Recomendado: 1600 × 2000 px (4:5), JPG ou WebP."
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Proporção da imagem",
+      "options": [
+        { "value": "portrait", "label": "Retrato 4:5" },
+        { "value": "tall", "label": "Alta 2:3" },
+        { "value": "square", "label": "Quadrada 1:1" }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_secondary",
+      "label": "Imagem pequena sobreposta (opcional)",
+      "info": "Recomendado: 800 × 800 px (1:1)."
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Posição da imagem no desktop",
+      "options": [
+        { "value": "right", "label": "Direita" },
+        { "value": "left", "label": "Esquerda" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "checkbox",
+      "id": "tilt_image",
+      "label": "Inclinar a moldura",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Selo em pílula sobre a imagem"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Texto do selo",
+      "default": "100% vegano"
+    },
+    {
+      "type": "select",
+      "id": "badge_icon",
+      "label": "Ícone do selo",
+      "options": [
+        { "value": "none", "label": "Nenhum" },
+        { "value": "gota", "label": "Gota" },
+        { "value": "folha", "label": "Folha" },
+        { "value": "chama", "label": "Chama" },
+        { "value": "brilho", "label": "Brilho" }
+      ],
+      "default": "folha"
+    },
+    {
+      "type": "select",
+      "id": "badge_style",
+      "label": "Estilo do selo",
+      "options": [
+        { "value": "outline", "label": "Contorno" },
+        { "value": "accent", "label": "Mel" },
+        { "value": "solid", "label": "Sólido" }
+      ],
+      "default": "accent"
+    },
+    {
+      "type": "text",
+      "id": "stamp_text",
+      "label": "Carimbo circular (texto)",
+      "info": "Deixe vazio para ocultar. Até ~32 caracteres. Ex.: \"feito à mão • pequenos lotes • \"",
+      "default": "feito à mão • pequenos lotes • "
+    },
+    {
+      "type": "select",
+      "id": "stamp_icon",
+      "label": "Ícone do carimbo",
+      "options": [
+        { "value": "gota", "label": "Gota" },
+        { "value": "folha", "label": "Folha" },
+        { "value": "chama", "label": "Chama" },
+        { "value": "brilho", "label": "Brilho" }
+      ],
+      "default": "gota"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cores",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço superior",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço inferior",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pill",
+      "name": "Selo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Feito à mão"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Ícone",
+          "options": [
+            { "value": "none", "label": "Nenhum" },
+            { "value": "gota", "label": "Gota" },
+            { "value": "folha", "label": "Folha" },
+            { "value": "chama", "label": "Chama" },
+            { "value": "brilho", "label": "Brilho" },
+            { "value": "coracao", "label": "Coração" }
+          ],
+          "default": "none"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MIRRA — Hero editorial",
+      "blocks": [
+        { "type": "pill", "settings": { "text": "Feito à mão", "icon": "coracao" } },
+        { "type": "pill", "settings": { "text": "Cruelty free", "icon": "folha" } },
+        { "type": "pill", "settings": { "text": "Ingredientes naturais", "icon": "gota" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

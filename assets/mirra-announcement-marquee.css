@@ -96,18 +96,14 @@
   cursor: pointer;
 }
 
-.mirra-marquee__icon-play,
-.mirra-marquee.is-paused .mirra-marquee__icon-pause {
-  display: none;
-}
-
+.mirra-marquee__icon-pause,
 .mirra-marquee.is-paused .mirra-marquee__icon-play {
   display: inline-flex;
 }
 
-.mirra-marquee__icon-pause,
-.mirra-marquee__icon-play {
-  display: inline-flex;
+.mirra-marquee__icon-play,
+.mirra-marquee.is-paused .mirra-marquee__icon-pause {
+  display: none;
 }
 
 .mirra-marquee__toggle:focus-visible {

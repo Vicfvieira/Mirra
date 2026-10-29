@@ -1,0 +1,166 @@
+.mirra-hero {
+  overflow: hidden;
+}
+
+.mirra-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'intro'
+    'media'
+    'content';
+  row-gap: 3.2rem;
+}
+
+.mirra-hero__intro {
+  grid-area: intro;
+}
+
+.mirra-hero__media {
+  grid-area: media;
+  position: relative;
+  width: min(100%, 52rem);
+  margin-inline: auto;
+  padding: 0 var(--mirra-frame-shadow-x, 10px) var(--mirra-frame-shadow-y, 10px) 0;
+}
+
+.mirra-hero__content {
+  grid-area: content;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.mirra-hero__title {
+  margin-top: 0.4rem;
+}
+
+.mirra-hero__badge {
+  position: absolute;
+  top: 2rem;
+  left: -0.8rem;
+  z-index: 2;
+  font-size: 1.3rem;
+  padding: 0.8rem 1.8rem;
+  transform: rotate(var(--mirra-tilt));
+  box-shadow: 3px 3px 0 rgb(var(--color-foreground));
+}
+
+.mirra-hero__frame-secondary {
+  position: absolute;
+  z-index: 2;
+  width: 38%;
+  right: -0.4rem;
+  bottom: -2.4rem;
+  --mirra-frame-shadow-x: 6px;
+  --mirra-frame-shadow-y: 6px;
+}
+
+.mirra-hero__stamp {
+  position: absolute;
+  z-index: 3;
+  right: -1.2rem;
+  top: -2.4rem;
+  width: 10.4rem;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgb(var(--mirra-highlight));
+  color: rgb(var(--mirra-highlight-label));
+  border: 2px solid rgb(var(--color-foreground));
+}
+
+.mirra-hero__stamp-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: mirra-spin 24s linear infinite;
+}
+
+.mirra-hero__stamp-ring text {
+  fill: currentColor;
+  font-family: var(--font-body-family);
+  font-weight: var(--font-body-weight-bold);
+  font-size: 16px;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+}
+
+.mirra-hero__stamp-icon {
+  display: inline-flex;
+}
+
+.mirra-hero__pills .mirra-pill {
+  background: transparent;
+}
+
+@media screen and (min-width: 750px) {
+  .mirra-hero__stamp {
+    width: 13.6rem;
+    right: -3.2rem;
+  }
+
+  .mirra-hero__badge {
+    left: -2.4rem;
+    top: 3.2rem;
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .mirra-hero__grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      'intro media'
+      'content media';
+    column-gap: 6.4rem;
+    row-gap: 4rem;
+    align-items: start;
+  }
+
+  .mirra-hero--image-left .mirra-hero__grid {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    grid-template-areas:
+      'media intro'
+      'media content';
+  }
+
+  .mirra-hero__intro {
+    align-self: end;
+  }
+
+  .mirra-hero__media {
+    width: 100%;
+    margin: 0;
+  }
+
+  .mirra-hero__title.mirra-title--xl {
+    margin-right: -12%;
+    position: relative;
+    z-index: 3;
+  }
+
+  .mirra-hero--image-left .mirra-hero__title.mirra-title--xl {
+    margin-right: 0;
+    margin-left: -12%;
+  }
+}
+
+@keyframes mirra-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mirra-hero__stamp-ring {
+    animation: none;
+  }
+
+  .mirra-hero__badge {
+    transform: none;
+  }
+}

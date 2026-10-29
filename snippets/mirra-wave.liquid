@@ -1,0 +1,27 @@
+{% comment %}
+  MIRRA — divisor ondulado (SVG). Preenche com currentColor.
+
+  Accepts:
+  - shape: {String} 'suave' (padrão) | 'ondas' | 'assimetrica'
+  - flip: {Boolean} espelhar horizontalmente
+
+  Usage:
+  {% render 'mirra-wave', shape: 'ondas' %}
+{% endcomment %}
+
+<svg
+  class="mirra-wave{% if flip %} mirra-wave--flip{% endif %}"
+  viewBox="0 0 1440 120"
+  preserveAspectRatio="none"
+  aria-hidden="true"
+  focusable="false"
+>
+  {%- case shape -%}
+    {%- when 'ondas' -%}
+      <path fill="currentColor" d="M0 60c60-40 120-40 180 0s120 40 180 0 120-40 180 0 120 40 180 0 120-40 180 0 120 40 180 0 120-40 180 0 120 40 180 0v60H0Z"/>
+    {%- when 'assimetrica' -%}
+      <path fill="currentColor" d="M0 70C120 10 240 10 360 60S600 110 720 60 960 10 1080 60 1320 100 1440 50V120H0Z"/>
+    {%- else -%}
+      <path fill="currentColor" d="M0 64c160-52 320-52 480-8s320 60 480 12 320-60 480-12v64H0Z"/>
+  {%- endcase -%}
+</svg>

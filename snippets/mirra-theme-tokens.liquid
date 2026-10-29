@@ -1,0 +1,52 @@
+{% comment %}
+  MIRRA — tokens de marca.
+  Complementa as variáveis do Dawn (theme.liquid) com:
+  - as cores de marca de cada esquema (`mirra_accent`, `mirra_highlight`, `mirra_highlight_label`)
+  - o itálico da fonte de título (palavra em destaque)
+  - os atalhos de moldura/sombra lidos das configurações de Mídia do tema
+  E carrega o CSS global da marca.
+
+  Usage:
+  {% render 'mirra-theme-tokens' %}
+{% endcomment %}
+
+{%- liquid
+  assign header_font_italic = settings.type_header_font | font_modify: 'style', 'italic'
+  if settings.mirra_tilt_frames
+    assign tilt = '-1.5deg'
+  else
+    assign tilt = '0deg'
+  endif
+-%}
+
+{% style %}
+  {{ header_font_italic | font_face: font_display: 'swap' }}
+
+  {% for scheme in settings.color_schemes -%}
+    {%- liquid
+      assign accent = scheme.settings.mirra_accent | default: scheme.settings.secondary_button_label
+      assign highlight = scheme.settings.mirra_highlight | default: scheme.settings.button
+      assign highlight_label = scheme.settings.mirra_highlight_label | default: scheme.settings.button_label
+    -%}
+    {% if forloop.index == 1 -%}
+      :root,
+    {%- endif %}
+    .color-{{ scheme.id }} {
+      --mirra-accent: {{ accent.red }},{{ accent.green }},{{ accent.blue }};
+      --mirra-highlight: {{ highlight.red }},{{ highlight.green }},{{ highlight.blue }};
+      --mirra-highlight-label: {{ highlight_label.red }},{{ highlight_label.green }},{{ highlight_label.blue }};
+    }
+  {% endfor %}
+
+  :root {
+    --mirra-font-heading-italic-style: {% if header_font_italic %}italic{% else %}oblique{% endif %};
+    --mirra-frame-width: max(var(--media-border-width), 2px);
+    --mirra-frame-radius: var(--media-radius);
+    --mirra-frame-shadow-x: var(--media-shadow-horizontal-offset);
+    --mirra-frame-shadow-y: var(--media-shadow-vertical-offset);
+    --mirra-tilt: {{ tilt }};
+  }
+{% endstyle %}
+
+{{ 'mirra-base.css' | asset_url | stylesheet_tag }}
+{{ 'mirra-skin.css' | asset_url | stylesheet_tag }}

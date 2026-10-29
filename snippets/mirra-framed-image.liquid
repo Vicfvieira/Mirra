@@ -1,0 +1,73 @@
+{% comment %}
+  MIRRA — imagem emoldurada (borda espessa + sombra sólida deslocada).
+  A espessura, o raio e o deslocamento vêm de Configurações do tema › Mídia.
+
+  Accepts:
+  - image: {Object} imagem (image_picker). Opcional: sem imagem mostra placeholder.
+  - ratio: {String} 'portrait' (4:5, padrão) | 'tall' (2:3) | 'square' (1:1) | 'landscape' (3:2) | 'adapt'
+  - sizes: {String} atributo sizes (padrão '100vw')
+  - lazy: {Boolean} carregar sob demanda (padrão true)
+  - alt: {String} texto alternativo (padrão: alt da imagem)
+  - placeholder: {String} nome do placeholder_svg_tag (padrão 'lifestyle-1')
+  - tilt: {Boolean} inclinar levemente a moldura (padrão false)
+  - class: {String} classe extra
+
+  Usage:
+  {% render 'mirra-framed-image', image: section.settings.image, ratio: 'portrait', sizes: '(min-width: 990px) 45vw, 90vw' %}
+{% endcomment %}
+
+{%- liquid
+  assign frame_ratio = ratio | default: 'portrait'
+  assign frame_sizes = sizes | default: '100vw'
+  assign frame_placeholder = placeholder | default: 'lifestyle-1'
+  assign image_alt = alt | default: image.alt | escape
+
+  case frame_ratio
+    when 'tall'
+      assign ratio_value = 1.5
+    when 'square'
+      assign ratio_value = 1
+    when 'landscape'
+      assign ratio_value = 0.6667
+    when 'adapt'
+      if image
+        assign ratio_value = 1 | divided_by: image.aspect_ratio
+      else
+        assign ratio_value = 1.25
+      endif
+    else
+      assign ratio_value = 1.25
+  endcase
+  assign ratio_percent = ratio_value | times: 100
+
+  if lazy == false
+    assign loading = 'eager'
+    assign priority = 'high'
+  else
+    assign loading = 'lazy'
+    assign priority = 'auto'
+  endif
+-%}
+
+<div
+  class="mirra-frame{% if tilt %} mirra-frame--tilt{% endif %}{% if class %} {{ class }}{% endif %}"
+  style="--mirra-frame-ratio: {{ ratio_percent }}%;"
+>
+  <div class="mirra-frame__inner">
+    {%- if image != blank -%}
+      {{
+        image
+        | image_url: width: 2000
+        | image_tag:
+          widths: '375, 550, 750, 1000, 1300, 1600, 2000',
+          sizes: frame_sizes,
+          loading: loading,
+          fetchpriority: priority,
+          alt: image_alt,
+          class: 'mirra-frame__img'
+      }}
+    {%- else -%}
+      {{ frame_placeholder | placeholder_svg_tag: 'mirra-frame__img placeholder-svg' }}
+    {%- endif -%}
+  </div>
+</div>

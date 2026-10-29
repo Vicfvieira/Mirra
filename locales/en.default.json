@@ -274,7 +274,6 @@
       "announcement": "Announcement",
       "announcement_bar": "Announcement bar"
     },
-
     "header": {
       "announcement": "Announcement",
       "menu": "Menu",
@@ -527,6 +526,54 @@
       "max_characters": "{{ max_chars }} characters max",
       "send_on": "YYYY-MM-DD",
       "send_on_label": "Send on (optional)"
+    }
+  },
+  "mirra": {
+    "marquee": {
+      "pause": "Pause ticker",
+      "play": "Play ticker",
+      "label": "Store announcements"
+    },
+    "carousel": {
+      "previous": "Previous",
+      "next": "Next",
+      "slide": "{{ index }} of {{ count }}",
+      "go_to": "Go to item {{ index }}"
+    },
+    "badges": {
+      "new": "New",
+      "bestseller": "Bestseller",
+      "low_stock": "Last units"
+    },
+    "shipping": {
+      "remaining_html": "<strong>{{ amount }}</strong> away from free shipping",
+      "unlocked": "Yay! You've unlocked free shipping.",
+      "label": "Progress to free shipping"
+    },
+    "product": {
+      "installments_html": "or <strong>{{ count }}x of {{ amount }}</strong> interest-free",
+      "sticky_add": "Add",
+      "sticky_label": "Quick buy"
+    },
+    "newsletter": {
+      "success": "You're in! Use your coupon on your first order:",
+      "copy": "Copy coupon",
+      "copied": "Coupon copied!",
+      "email_label": "Your best email"
+    },
+    "footer": {
+      "demo": "Demo store — fictional brand",
+      "credit": "Developed by",
+      "payment": "Payment methods",
+      "social": "Social media",
+      "new_window": "opens in a new tab"
+    },
+    "testimonials": {
+      "rating": "Rating: {{ rating }} out of 5 stars"
+    },
+    "general": {
+      "step": "Step {{ number }}",
+      "search": "Search the store"
     }
   }
 }

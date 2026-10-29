@@ -2,6 +2,8 @@
 
 Ordem sugerida. Itens marcados com ⚠️ precisam vir **antes** do passo seguinte.
 
+**Estratégia:** monte e teste tudo na *development store* (grátis, protegida por senha) — passos 1 a 12. Só no fim (passo 13) transfira a loja para você, assine um plano e abra o link ao público. Assim você só começa a pagar quando a loja estiver pronta.
+
 ## 1. Loja e idioma
 - [ ] **Configurações › Geral › Moeda da loja: Real (BRL)** ⚠️ antes de importar produtos.
 - [ ] **Configurações › Geral › Formatos de moeda**: `R$ {{amount_with_comma_separator}}` (HTML e e-mail).
@@ -73,18 +75,31 @@ Ordem sugerida. Itens marcados com ⚠️ precisam vir **antes** do passo seguin
 - [ ] Tarifa **Frete grátis** com condição *preço do pedido ≥ R$ 199* — **o mesmo valor** de *Configurações do tema › MIRRA — Loja*.
 - [ ] Pesos já vêm no CSV (gramas) caso use cálculo por peso ou app de frete (Melhor Envio, Frenet etc.).
 
-## 10. Pagamentos
-- [ ] Em loja de desenvolvimento, use o **Bogus Gateway** (Shopify Payments em modo teste) para simular pedidos.
-- [ ] Para uma loja real no Brasil: provedor com **Pix, boleto e cartão parcelado** (ex.: Mercado Pago, Pagar.me, Appmax) — o parcelamento real é configurado no provedor; o tema só exibe "até 6x" (ajuste o número em *MIRRA — Loja* para bater).
-- [ ] O rodapé mostra automaticamente os ícones dos métodos ativos.
+## 10. Pagamentos (loja demonstrativa: nenhum meio de pagamento real)
+- [ ] **Enquanto ainda for development store**: ative o **Bogus Gateway** (*Configurações › Pagamentos*) só para testar o fluxo completo — adicionar ao carrinho, gaveta, checkout e pedido de teste.
+- [ ] **Antes de abrir ao público (passo 13)**: **desative o Bogus Gateway e não ative nenhum provedor** (nem Shopify Payments, Mercado Pago, Pix etc.). Sem meio de pagamento, o checkout não consegue concluir pedidos — ninguém compra de verdade.
+- [ ] Com nenhum método ativo, o rodapé esconde os ícones de pagamento automaticamente e mantém só a *Nota de pagamento* (texto ilustrativo "Pix • Boleto • 6x"). Se preferir esconder também a nota, apague o texto em *Rodapé › Nota de pagamento*.
 
 ## 11. Descontos
 **Descontos › Criar desconto › Valor do produto/pedido**
 - [ ] Código **`BEMVINDA10`**, 10%, *limitar a um uso por cliente*. O código é o mesmo da seção Newsletter e do letreiro.
-- [ ] (Opcional) Desconto automático de 5% para Pix depende do provedor de pagamento.
+- [ ] O cupom é aplicado no checkout; como a loja não tem pagamento, ele serve só para demonstrar o fluxo.
 
 ## 12. Preferências e acesso
 **Loja virtual › Preferências**
 - [ ] Título e meta descrição da home; imagem de compartilhamento social (1200 × 628).
-- [ ] **Senha da loja**: lojas de desenvolvimento ficam protegidas — envie a senha para quem for ver o portfólio, ou use o link de pré-visualização do tema.
-- [ ] Mensagem da página de senha em português.
+- [ ] Enquanto for development store, a senha da vitrine fica em *Proteção por senha* — use-a para testar em outros aparelhos. Ela é removida no passo 13.
+
+## 13. Abrir a loja ao público (plano pago)
+Development stores são **sempre** protegidas por senha — não dá para remover. Para o cliente abrir o link direto, a loja precisa virar uma loja normal, com plano.
+
+- [ ] **1.** **Revisão final** na development store: passos 1 a 12 completos, tema MIRRA publicado, testes feitos em 375 / 768 / 1440 px.
+- [ ] **2.** **Transferir a propriedade para você**: *Painel de Parceiros › Lojas* → abra o menu da loja → **Transferir propriedade**. Informe o e-mail de destino (pode ser o seu) e confirme. Você continua com acesso de colaboradora pelo Painel de Parceiros.
+- [ ] **3.** **Assinar um plano**: entre no admin com a conta que recebeu a loja → *Configurações › Plano* → escolha **Basic** (ou superior). ⚠️ O plano *Starter* **não** serve: não tem loja virtual com tema. Confira o preço atual na página de planos — costuma haver promoção nos primeiros meses.
+- [ ] **4.** **Pagamentos**: confirme que **nenhum** provedor está ativo (ver passo 10). Se o admin sugerir ativar Shopify Payments, ignore.
+- [ ] **5.** **Remover a senha**: *Loja virtual › Preferências* (em algumas contas: *Configurações › Loja virtual › Acesso à loja*) → **desmarque "Proteção por senha"** → Salvar.
+- [ ] **6.** **Testar como visitante**: abra o link `https://SUA-LOJA.myshopify.com` numa janela anônima (sem login) e no celular. Deve abrir direto na home, sem senha. Adicione um produto, abra a gaveta e vá ao checkout: ele deve mostrar que não há forma de pagamento disponível.
+- [ ] **7.** **(Opcional) Domínio próprio**: *Configurações › Domínios › Conectar domínio existente* (ex.: `mirra.seudominio.com`, com registro CNAME para `shops.myshopify.com`). Depois, defina-o como domínio principal.
+- [ ] **8.** **Avisos de demonstração** continuam visíveis: letreiro ("Loja demonstrativa — marca fictícia"), selo no rodapé, aviso nos depoimentos e a pergunta "A MIRRA existe de verdade?" no FAQ. Mantenha os quatro.
+- [ ] **9.** **Newsletter**: com a loja pública, pessoas reais podem cadastrar o e-mail. A política de privacidade (passo 8) precisa dizer que é uma loja demonstrativa e que os dados não são usados para marketing — ou desative a seção *MIRRA — Newsletter* no editor (ícone de olho).
+- [ ] **10.** **Compartilhar**: use o link (ou domínio) no seu portfólio e nas propostas. Em *Preferências*, confira título, descrição e imagem de compartilhamento (1200 × 628) para o link ficar bonito no WhatsApp e no LinkedIn.

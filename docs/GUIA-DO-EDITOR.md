@@ -86,7 +86,7 @@ Blocos da seção **Informações do produto** (Dawn) + blocos MIRRA:
 |---|---|
 | **MIRRA — Selos** | Selos de status (Novo/Mais vendido/Últimas unidades) + até 4 pílulas de benefício com ícone. Opção de mostrar só em produtos com uma tag. |
 | **MIRRA — Parcelamento** | "ou 6x de R$ X sem juros" (respeita a parcela mínima) + texto extra ("5% off no Pix"). Atualiza ao trocar a variante. |
-| **Conteúdo recolhível** ×3 | *Modo de uso* e *Ingredientes* puxam os metafields `custom.modo_de_uso` e `custom.ingredientes` de cada produto; *Envio e trocas* é um texto fixo. |
+| **MIRRA — Acordeão** ×3 | Lê um metafield do produto (campo *namespace.chave*): *Modo de uso* → `custom.modo_de_uso`, *Ingredientes* → `custom.ingredientes`. Sem o metafield, usa o *texto de reserva*; sem nenhum dos dois, o acordeão some. *Envio e trocas* usa só o texto de reserva. Ícones próprios da marca. |
 
 Outras seções do modelo: **Produtos relacionados** ("Combina com seu ritual") e **MIRRA — Compra fixa** (barra que aparece no celular quando o botão de compra sai da tela; opção para mostrar também no desktop).
 

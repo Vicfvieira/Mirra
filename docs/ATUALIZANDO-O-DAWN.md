@@ -10,7 +10,7 @@ Base: **Dawn v16.0.0**. Todo o código novo tem prefixo `mirra-` e mora em arqui
 | `snippets/card-product.liquid` | `{%- render 'mirra-product-badges', product: card_product, max: 1 -%}` dentro dos **dois** `<div class="card__badge …">` | 2 linhas |
 | `snippets/cart-drawer.liquid` | `{%- if cart != empty -%}{% render 'mirra-free-shipping-bar' %}{%- endif -%}` logo após o `drawer__header` | 1 linha |
 | `sections/main-cart-footer.liquid` | `{%- render 'mirra-free-shipping-bar' -%}` no início de `.js-contents` | 1 linha |
-| `sections/main-product.liquid` | 2 `when` no `case block.type` (`mirra_badges`, `mirra_installments`) + 2 blocos no schema | Copiar os trechos marcados com `mirra` |
+| `sections/main-product.liquid` | 3 `when` no `case block.type` (`mirra_badges`, `mirra_accordion`, `mirra_installments`) + 3 blocos no schema | Copiar os trechos marcados com `mirra` |
 | `config/settings_schema.json` | 3 cores no `color_scheme_group` (`mirra_accent`, `mirra_highlight`, `mirra_highlight_label`) + grupo "MIRRA — Loja" | Copiar |
 | `config/settings_data.json` | Preset MIRRA | Manter o nosso |
 | `locales/pt-BR.json`, `locales/en.default.json` | Chave `mirra` | Copiar a chave |

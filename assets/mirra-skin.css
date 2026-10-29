@@ -478,3 +478,18 @@ body {
     transition: none;
   }
 }
+
+/* ---------- Acordeão MIRRA (produto) ---------- */
+.mirra-accordion .summary__title {
+  align-items: center;
+}
+
+.mirra-accordion__icon {
+  display: inline-flex;
+  margin-right: 1rem;
+  color: rgb(var(--mirra-accent));
+}
+
+.mirra-accordion__icon:empty {
+  display: none;
+}

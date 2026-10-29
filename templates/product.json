@@ -51,30 +51,33 @@
           "type": "description"
         },
         "tab_uso": {
-          "type": "collapsible_tab",
+          "type": "mirra_accordion",
           "settings": {
             "heading": "Modo de uso",
-            "icon": "perfume",
-            "content": "{{ product.metafields.custom.modo_de_uso | metafield_tag }}",
-            "page": ""
+            "icon": "gota",
+            "metafield": "custom.modo_de_uso",
+            "fallback": "",
+            "open": true
           }
         },
         "tab_ingredientes": {
-          "type": "collapsible_tab",
+          "type": "mirra_accordion",
           "settings": {
             "heading": "Ingredientes",
-            "icon": "leaf",
-            "content": "{{ product.metafields.custom.ingredientes | metafield_tag }}",
-            "page": ""
+            "icon": "folha",
+            "metafield": "custom.ingredientes",
+            "fallback": "",
+            "open": false
           }
         },
         "tab_envio": {
-          "type": "collapsible_tab",
+          "type": "mirra_accordion",
           "settings": {
             "heading": "Envio e trocas",
-            "icon": "truck",
-            "content": "<p>Enviamos para todo o Brasil em até 2 dias úteis após a confirmação do pagamento, com código de rastreio por e-mail. Frete grátis em compras acima de R$ 199.</p><p>Você tem 7 dias após o recebimento para trocar ou devolver (produto lacrado). Fale com a gente pelo contato.</p>",
-            "page": ""
+            "icon": "caminhao",
+            "metafield": "",
+            "fallback": "<p>Enviamos para todo o Brasil em até 2 dias úteis após a confirmação do pagamento, com código de rastreio por e-mail. Frete grátis em compras acima de R$ 199.</p><p>Você tem 7 dias após o recebimento para trocar ou devolver (produto lacrado). Fale com a gente pela página de contato.</p>",
+            "open": false
           }
         },
         "share": {

@@ -66,7 +66,7 @@ A cor de **destaque** é um campo novo dentro de cada esquema (`mirra_accent`), 
 
 ### Novos — snippets
 
-`mirra-theme-tokens` (variáveis por esquema + itálico do título + CSS global) · `mirra-icon` (ícones próprios) · `mirra-pill` (selo em pílula) · `mirra-framed-image` (imagem emoldurada com srcset/lazy) · `mirra-wave` (SVG ondulado) · `mirra-product-badges` (Novo / Mais vendido / Últimas unidades) · `mirra-product-pills` (selos na página de produto) · `mirra-installments` (parcelamento) · `mirra-free-shipping-bar` (frete grátis) · `mirra-coupon` (cupom com copiar)
+`mirra-theme-tokens` (variáveis por esquema + itálico do título + CSS global) · `mirra-icon` (ícones próprios) · `mirra-pill` (selo em pílula) · `mirra-framed-image` (imagem emoldurada com srcset/lazy) · `mirra-wave` (SVG ondulado) · `mirra-product-badges` (Novo / Mais vendido / Últimas unidades) · `mirra-product-pills` (selos na página de produto) · `mirra-installments` (parcelamento) · `mirra-product-accordion` (acordeão por metafield) · `mirra-free-shipping-bar` (frete grátis) · `mirra-coupon` (cupom com copiar)
 
 ### Novos — assets
 
@@ -78,7 +78,7 @@ A cor de **destaque** é um campo novo dentro de cada esquema (`mirra_accent`), 
 
 ### Alterados no core do Dawn (ganchos mínimos)
 
-Ver [ATUALIZANDO-O-DAWN.md](ATUALIZANDO-O-DAWN.md): `layout/theme.liquid` (1 linha), `snippets/card-product.liquid` (2), `snippets/cart-drawer.liquid` (1), `sections/main-cart-footer.liquid` (1), `sections/main-product.liquid` (2 blocos), `config/settings_schema.json`, `config/settings_data.json`, `locales/pt-BR.json` e `locales/en.default.json`.
+Ver [ATUALIZANDO-O-DAWN.md](ATUALIZANDO-O-DAWN.md): `layout/theme.liquid` (1 linha), `snippets/card-product.liquid` (2), `snippets/cart-drawer.liquid` (1), `sections/main-cart-footer.liquid` (1), `sections/main-product.liquid` (3 blocos), `config/settings_schema.json`, `config/settings_data.json`, `locales/pt-BR.json` e `locales/en.default.json`.
 
 ## Etapas e commits
 

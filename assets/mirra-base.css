@@ -227,6 +227,23 @@
   transform: translateX(0.4rem);
 }
 
+/* ---------- Campo de texto em pílula ---------- */
+.mirra-input {
+  width: 100%;
+  min-height: 5.6rem;
+  padding: 0 2.4rem;
+  border: 2px solid rgb(var(--color-foreground));
+  border-radius: 999px;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  font: inherit;
+  font-size: 1.6rem;
+}
+
+.mirra-input::placeholder {
+  color: rgba(var(--color-foreground), 0.65);
+}
+
 /* ---------- Foco visível (AA) ---------- */
 .mirra-section a:focus-visible,
 .mirra-section button:focus-visible,

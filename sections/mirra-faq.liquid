@@ -1,0 +1,209 @@
+{{ 'mirra-pages.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="mirra-section mirra-faq color-{{ section.settings.color_scheme }} gradient"
+  style="--mirra-pt: {{ section.settings.padding_top }}px; --mirra-pb: {{ section.settings.padding_bottom }}px;"
+  aria-labelledby="MirraFaqTitle-{{ section.id }}"
+>
+  <div class="page-width mirra-faq__grid">
+    <div class="mirra-faq__aside">
+      <h2 id="MirraFaqTitle-{{ section.id }}" class="mirra-title mirra-title--md">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}
+        <div class="mirra-lead mirra-richtext">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        <a href="{{ section.settings.button_link }}" class="button button--secondary">
+          {{- section.settings.button_label | escape -}}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="mirra-faq__list">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'group' -%}
+            <h3 class="mirra-faq__group" {{ block.shopify_attributes }}>
+              {%- render 'mirra-icon', icon: block.settings.icon, size: 22 -%}
+              {{ block.settings.title }}
+            </h3>
+          {%- when 'question' -%}
+            <details
+              class="mirra-faq__item"
+              {{ block.shopify_attributes }}
+              {% if section.settings.open_first and forloop.first %}
+                open
+              {% endif %}
+            >
+              <summary class="mirra-faq__question">
+                <span>{{ block.settings.question }}</span>
+                <span class="mirra-faq__toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="mirra-faq__answer mirra-richtext rte">{{ block.settings.answer }}</div>
+            </details>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{%- if section.settings.structured_data -%}
+  {%- liquid
+    assign faq_count = 0
+    for block in section.blocks
+      if block.type == 'question'
+        assign faq_count = faq_count | plus: 1
+      endif
+    endfor
+  -%}
+  {%- if faq_count > 0 -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {%- assign first = true -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'question' -%}
+              {%- unless first %},{% endunless -%}
+              {%- assign first = false -%}
+              {
+                "@type": "Question",
+                "name": {{ block.settings.question | json }},
+                "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | strip_html | json }} }
+              }
+            {%- endif -%}
+          {%- endfor -%}
+        ]
+      }
+    </script>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "MIRRA — Perguntas (FAQ)",
+  "tag": "div",
+  "class": "mirra-faq-section",
+  "max_blocks": 40,
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "default": "Perguntas <em>frequentes</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Não achou sua resposta? Fale com a gente — respondemos em até 1 dia útil.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto do botão",
+      "default": "Falar com a MIRRA"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link do botão"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Deixar a primeira pergunta aberta",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "structured_data",
+      "label": "Gerar dados estruturados (FAQPage) para o Google",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cores",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço superior",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço inferior",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "group",
+      "name": "Grupo de perguntas",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título do grupo",
+          "default": "Pedidos e envio"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Ícone",
+          "options": [
+            { "value": "none", "label": "Nenhum" },
+            { "value": "caminhao", "label": "Caminhão" },
+            { "value": "cartao", "label": "Cartão" },
+            { "value": "troca", "label": "Troca" },
+            { "value": "folha", "label": "Folha" },
+            { "value": "gota", "label": "Gota" },
+            { "value": "chama", "label": "Chama" },
+            { "value": "presente", "label": "Presente" }
+          ],
+          "default": "caminhao"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "name": "Pergunta",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Pergunta",
+          "default": "Qual o prazo de entrega?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Resposta",
+          "default": "<p>Despachamos em até 2 dias úteis. O prazo final depende do CEP e aparece no checkout.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MIRRA — Perguntas (FAQ)",
+      "blocks": [
+        { "type": "question" },
+        { "type": "question", "settings": { "question": "Os produtos são veganos?", "answer": "<p>Sim. Nenhum ingrediente de origem animal e nenhum teste em animais.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

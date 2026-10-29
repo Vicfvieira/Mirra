@@ -1,0 +1,163 @@
+{
+  "sections": {
+    "hero": {
+      "type": "mirra-page-hero",
+      "blocks": {
+        "p1": {
+          "type": "pill",
+          "settings": {
+            "text": "Fundada em 2026",
+            "icon": "brilho"
+          }
+        },
+        "p2": {
+          "type": "pill",
+          "settings": {
+            "text": "Pequenos lotes",
+            "icon": "gota"
+          }
+        },
+        "p3": {
+          "type": "pill",
+          "settings": {
+            "text": "Marca fictícia",
+            "icon": "none"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {
+        "eyebrow": "Nossa história",
+        "icon": "folha",
+        "heading": "Rituais pequenos, <em>efeitos</em> grandes.",
+        "heading_size": "xl",
+        "text": "<p>A MIRRA nasceu da vontade de transformar o autocuidado em algo simples, sensorial e possível no meio da rotina.</p>",
+        "alignment": "left",
+        "color_scheme": "scheme-2",
+        "padding_top": 80,
+        "padding_bottom": 48
+      }
+    },
+    "wave": {
+      "type": "mirra-wave-divider",
+      "settings": {
+        "color_scheme_top": "scheme-2",
+        "color_scheme_bottom": "scheme-1",
+        "shape": "suave",
+        "flip": true,
+        "height": 64
+      }
+    },
+    "founder": {
+      "type": "mirra-founder",
+      "settings": {
+        "photo_caption": "Desde a primeira vela",
+        "image_position": "right",
+        "eyebrow": "A fundadora",
+        "heading": "Tudo começou numa <em>cozinha</em> com cheiro de alecrim.",
+        "quote": "Eu queria produtos que fizessem a gente parar. Nem que fosse por cinco minutos.",
+        "text": "<p>Entre panelas de cera e frascos de vidro âmbar, a Marina testou dezenas de receitas até chegar ao primeiro óleo corporal. Hoje cada lote ainda é produzido à mão, em pequenas quantidades.</p>",
+        "name": "Marina Rocha",
+        "role": "Fundadora & perfumista (personagem fictícia)",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 48,
+        "padding_bottom": 80
+      }
+    },
+    "values": {
+      "type": "mirra-benefits",
+      "blocks": {
+        "v1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "folha",
+            "title": "Ingredientes vegetais",
+            "text": "Óleos prensados a frio e ceras vegetais"
+          }
+        },
+        "v2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "coracao",
+            "title": "Cruelty free",
+            "text": "Nada testado em animais. Nunca."
+          }
+        },
+        "v3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "gota",
+            "title": "Pequenos lotes",
+            "text": "Feitos à mão, com frescor garantido"
+          }
+        },
+        "v4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "troca",
+            "title": "Embalagens retornáveis",
+            "text": "Devolva os potes e ganhe desconto"
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4"
+      ],
+      "settings": {
+        "heading": "No que a gente <em>acredita</em>",
+        "accessible_label": "Valores da marca",
+        "color_scheme": "scheme-2",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "story": {
+      "type": "mirra-rich-text",
+      "settings": {
+        "eyebrow": "Manifesto",
+        "heading": "Desacelerar também é <em>cuidado</em>",
+        "show_page_content": true,
+        "text": "<p>Acreditamos que pequenos gestos repetidos todos os dias mudam a forma como a gente se sente. Acender uma vela antes de começar a trabalhar. Massagear as mãos com óleo no fim do dia. Respirar fundo antes de dormir.</p><blockquote>Ritual não é luxo. É intenção.</blockquote><p>Por isso criamos produtos simples, com poucos ingredientes e muito cheiro bom — para caber na sua rotina, não para complicar.</p><p><em>A MIRRA é uma marca fictícia, criada como loja demonstrativa.</em></p>",
+        "layout": "split",
+        "color_scheme": "scheme-1",
+        "padding_top": 96,
+        "padding_bottom": 48
+      }
+    },
+    "newsletter": {
+      "type": "mirra-newsletter",
+      "settings": {
+        "eyebrow": "Clube MIRRA",
+        "heading": "Ganhe <em>10% off</em> no primeiro ritual",
+        "text": "<p>Receba lançamentos, receitas de autocuidado e ofertas antes de todo mundo.</p>",
+        "placeholder": "seu@email.com",
+        "button_label": "Quero meu cupom",
+        "coupon_code": "BEMVINDA10",
+        "show_coupon_upfront": false,
+        "coupon_label": "Use na primeira compra:",
+        "fineprint": "<p>Válido para a primeira compra.</p>",
+        "color_scheme": "scheme-1",
+        "box_color_scheme": "scheme-3",
+        "padding_top": 48,
+        "padding_bottom": 120
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "wave",
+    "founder",
+    "values",
+    "story",
+    "newsletter"
+  ]
+}

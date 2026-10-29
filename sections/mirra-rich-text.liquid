@@ -1,0 +1,100 @@
+{{ 'mirra-pages.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="mirra-section mirra-rich-text color-{{ section.settings.color_scheme }} gradient mirra-rich-text--{{ section.settings.layout }}"
+  style="--mirra-pt: {{ section.settings.padding_top }}px; --mirra-pb: {{ section.settings.padding_bottom }}px;"
+  {% if section.settings.heading != blank %}
+    aria-labelledby="MirraRichTextTitle-{{ section.id }}"
+  {% endif %}
+>
+  <div class="page-width mirra-rich-text__grid">
+    {%- if section.settings.heading != blank -%}
+      <div class="mirra-rich-text__aside">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="mirra-eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 id="MirraRichTextTitle-{{ section.id }}" class="mirra-title mirra-title--md">{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+    <div class="mirra-rich-text__body mirra-richtext rte">
+      {%- if section.settings.show_page_content and page.content != blank -%}
+        {{ page.content }}
+      {%- endif -%}
+      {{ section.settings.text }}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MIRRA — Texto editorial",
+  "tag": "div",
+  "class": "mirra-rich-text-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Chamada acima do título"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "default": "Nossos <em>valores</em>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_page_content",
+      "label": "Mostrar o conteúdo da página (admin › Páginas)",
+      "default": false
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Escreva aqui a história, os valores ou qualquer texto longo da marca.</p>"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout no desktop",
+      "options": [
+        { "value": "split", "label": "Título ao lado do texto" },
+        { "value": "stacked", "label": "Título acima do texto" }
+      ],
+      "default": "split"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cores",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço superior",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Espaço inferior",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "MIRRA — Texto editorial"
+    }
+  ]
+}
+{% endschema %}
